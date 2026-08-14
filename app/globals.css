@@ -1,0 +1,89 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy: #14243e;
+  --color-navy-ink: #0e1a2c;
+  --color-gold: #ffc20e;
+  --color-paper: #f7f5f0;
+
+  --font-display: var(--font-fredoka);
+  --font-body: var(--font-public-sans);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-navy);
+  color: var(--color-paper);
+  font-family: var(--font-body);
+}
+
+::selection {
+  background: var(--color-gold);
+  color: var(--color-navy);
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-gold);
+  outline-offset: 3px;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+/* Editorial rule: a thin horizontal line broken by the Pensador mark, used
+   as the section divider called for in the brief instead of blank gutters. */
+.pensador-rule {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.pensador-rule::before,
+.pensador-rule::after {
+  content: "";
+  flex: 1;
+  height: 2px;
+  background: currentColor;
+  opacity: 0.25;
+}
+
+/* The one authored entrance moment: the hero numeral unfolds upward once,
+   the page's single memorable motion beat — never repeated per-section. */
+@keyframes numeral-reveal {
+  from {
+    clip-path: inset(0 0 100% 0);
+    transform: translateY(0.4em);
+  }
+  to {
+    clip-path: inset(0 0 0% 0);
+    transform: translateY(0);
+  }
+}
+.hero-numeral {
+  animation: numeral-reveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-numeral {
+    animation: none;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.animate-marquee {
+  animation: marquee 28s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
+}
