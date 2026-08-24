@@ -44,6 +44,16 @@ export type Evento = {
   isPlaceholder: boolean;
 };
 
+export type Noticia = {
+  titulo: string;
+  resumo: string;
+  data: string;
+  tema: Tema;
+  /** Optional link to the original source; unlinked when no source is confirmed. */
+  href?: string;
+  isPlaceholder: boolean;
+};
+
 export type Plataforma = {
   nome: string;
   href: string;
@@ -124,6 +134,30 @@ export const artigos: Artigo[] = [
   },
 ];
 
+export const noticias: Noticia[] = [
+  {
+    titulo: "[TÍTULO DA NOTÍCIA]",
+    resumo: "[Resumo da notícia — uma a duas frases, factuais, sem especulação.]",
+    data: "[DATA]",
+    tema: "ECONOMIA",
+    isPlaceholder: true,
+  },
+  {
+    titulo: "[TÍTULO DA NOTÍCIA]",
+    resumo: "[Resumo da notícia — uma a duas frases, factuais, sem especulação.]",
+    data: "[DATA]",
+    tema: "POLÍTICA",
+    isPlaceholder: true,
+  },
+  {
+    titulo: "[TÍTULO DA NOTÍCIA]",
+    resumo: "[Resumo da notícia — uma a duas frases, factuais, sem especulação.]",
+    data: "[DATA]",
+    tema: "SOCIEDADE",
+    isPlaceholder: true,
+  },
+];
+
 /** No confirmed future events. Per brief: never invent one. */
 export const proximosEventos: Evento[] = [];
 
@@ -151,7 +185,8 @@ export function tempoDeLeitura(artigo: Artigo): number {
 }
 
 export const contacto = {
-  email: "[EMAIL PARA PARCERIAS]",
+  email: "hsvanda18@gmail.com",
+  emailIsPlaceholder: false,
   redes: [
     {
       nome: "Facebook",

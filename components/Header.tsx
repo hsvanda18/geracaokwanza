@@ -1,18 +1,24 @@
+"use client";
+
 import Link from "next/link";
+import { useState } from "react";
 import { KwanzaFrame } from "./icons/KwanzaFrame";
 import { Pensador } from "./icons/Pensador";
 
 const links = [
   { href: "/episodios", label: "Episódios" },
   { href: "/artigos", label: "Artigos" },
-  { href: "/#eventos", label: "Eventos" },
+  { href: "/noticias", label: "Notícias" },
+  { href: "/eventos", label: "Eventos" },
 ];
 
 export function Header() {
+  const [menuAberto, setMenuAberto] = useState(false);
+
   return (
     <header className="sticky top-0 z-40 border-b-2 border-gold/30 bg-navy/95 backdrop-blur">
       <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-4 px-5 py-3 sm:px-8">
-        <Link href="/" className="flex items-center gap-3">
+        <Link href="/" className="flex items-center gap-3" onClick={() => setMenuAberto(false)}>
           <span className="relative flex h-10 w-10 shrink-0 items-center justify-center">
             <KwanzaFrame size={40} color="var(--color-gold)" strokeWidth={9} seeds={false} />
             <Pensador size={16} color="var(--color-gold)" className="absolute" />
@@ -36,13 +42,63 @@ export function Header() {
           ))}
         </nav>
 
-        <Link
-          href="/episodios"
-          className="border-2 border-gold px-4 py-2 font-body text-xs font-bold tracking-[0.1em] text-gold uppercase transition-colors hover:bg-gold hover:text-navy sm:text-sm"
-        >
-          Ouvir agora
-        </Link>
+        <div className="flex items-center gap-3">
+          <Link
+            href="/episodios"
+            className="border-2 border-gold px-4 py-2 font-body text-xs font-bold tracking-[0.1em] text-gold uppercase transition-colors hover:bg-gold hover:text-navy sm:text-sm"
+          >
+            Ouvir agora
+          </Link>
+
+          <button
+            type="button"
+            aria-expanded={menuAberto}
+            aria-controls="menu-movel"
+            aria-label={menuAberto ? "Fechar menu" : "Abrir menu"}
+            onClick={() => setMenuAberto((aberto) => !aberto)}
+            className="flex h-9 w-9 shrink-0 items-center justify-center border-2 border-gold/60 text-gold md:hidden"
+          >
+            <svg width="16" height="12" viewBox="0 0 16 12" fill="none" aria-hidden="true">
+              {menuAberto ? (
+                <path
+                  d="M1 1 L15 11 M15 1 L1 11"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="square"
+                />
+              ) : (
+                <path
+                  d="M0 1 H16 M0 6 H16 M0 11 H16"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                />
+              )}
+            </svg>
+          </button>
+        </div>
       </div>
+
+      {menuAberto && (
+        <nav
+          id="menu-movel"
+          aria-label="Secções"
+          className="border-t-2 border-gold/30 bg-navy md:hidden"
+        >
+          <ul className="mx-auto flex max-w-[1400px] flex-col divide-y divide-gold/15 px-5 sm:px-8">
+            {links.map((link) => (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  onClick={() => setMenuAberto(false)}
+                  className="block py-4 font-body text-sm font-semibold tracking-wide text-paper/85 uppercase transition-colors hover:text-gold"
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )}
     </header>
   );
 }

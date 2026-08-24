@@ -24,10 +24,13 @@ Not comedy, not entertainment — civic debate with strong editorial identity. P
 
 ## Operating Context
 
-Three content types, in this fixed priority order:
+Four content types, in this fixed priority order:
 1. **Episódios** (recorded video/audio) — primary, protagonist content type.
 2. **Artigos** — written analysis, editorial register.
-3. **Eventos** — past (archive) and future (agenda), shown as two unequal columns (upcoming vs. past), not merged.
+3. **Notícias** — short, dated factual updates (title, one/two-line summary, date, theme tag); no full body, no dedicated per-item page — a quick-update register, distinct from Artigos' long-form analysis.
+4. **Eventos** — past (archive) and future (agenda), shown as two unequal columns (upcoming vs. past), not merged.
+
+Episódios, Artigos, and Notícias each get a homepage preview (recent items + "Ver todos/todas" link) plus a dedicated full-listing page (`/episodios`, `/artigos`, `/noticias`). Eventos follows the same preview-plus-dedicated-page pattern (`/eventos`) rather than showing its full archive inline on the homepage.
 
 Primary single call-to-action across the page: listen to / watch the latest episode (user-confirmed). Everything else is secondary and must not compete visually with this action.
 
@@ -36,7 +39,7 @@ Primary single call-to-action across the page: listen to / watch the latest epis
 - Content categorization: episodes/articles are tagged by theme — ECONOMIA / POLÍTICA / SOCIEDADE — as consistent thematic labels.
 - No real episode, article, event, or platform-link data was supplied at build time. Per explicit user instruction, the build must use **visible placeholder markers** (e.g. `[TÍTULO DO EPISÓDIO]`) rather than inventing plausible-sounding content, metrics, testimonials, or press quotes. Sections with no real content shrink or are omitted rather than filled with fabricated entries.
 - Podcast distribution platforms (YouTube, Spotify, Apple Podcasts, etc.) are unconfirmed — only platforms where the podcast genuinely exists should be shown; this list is currently undecided and marked as a placeholder in the build.
-- Contact/partnership email is unconfirmed — undecided, placeholder in the build.
+- Contact/partnership email: `hsvanda18@gmail.com` (confirmed, live in the footer).
 - Copy must be 100% European/Angolan Portuguese (português de Angola).
 
 ## Brand Commitments
@@ -58,7 +61,7 @@ The user's briefing fixes the visual direction as binding, not a starting point 
 
 ## Product Principles
 
-1. Episodes lead, articles inform, events are supporting evidence of activity — this hierarchy governs page order and visual weight, never a single undifferentiated content grid.
+1. Episodes lead, articles inform, notícias give quick factual updates, events are supporting evidence of activity — this hierarchy governs page order and visual weight, never a single undifferentiated content grid.
 2. Never invent content, metrics, or quotes. Missing real data becomes a visible placeholder, not plausible filler.
 3. The page's graphic identity must be irreplaceable — built from the deconstructed logo pattern and the Pensador mark, not swappable with a generic podcast template if the logo were removed.
 4. One primary action (listen/watch latest episode) dominates; everything else is deliberately secondary.

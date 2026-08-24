@@ -50,8 +50,8 @@ file:
   decorative border on ordinary content.
 - `components/icons/Pensador.tsx` — a stylized seated, chin-on-fist
   silhouette. Used as: the favicon (`app/icon.svg`), the section-divider
-  rule (`.pensador-rule`), and the list bullet for articles and upcoming
-  events — replacing the generic numbered-list / colored-left-border
+  rule (`.pensador-rule`), and the list bullet for articles, notícias, and
+  upcoming events — replacing the generic numbered-list / colored-left-border
   patterns the craft floor bans.
 
 ## Corner & border system
@@ -67,17 +67,32 @@ colored single-side accent border on a card or list item.
 
 ## Content hierarchy
 
-Three content types, fixed order and never merged into one grid:
+Four content types, fixed order and never merged into one grid. Episódios,
+Artigos, and Notícias each pair a homepage preview section with a dedicated
+full-listing page; Eventos follows the same preview-plus-page pattern
+instead of showing its full archive inline on the homepage:
 
-1. **Episódios** — hero (latest) + `EpisodesSection` grid (recent). Poster
-   cards: big `EP. Nº` numeral, theme tag, title, guest/duration footer.
-   No photography (none was supplied, and gray placeholder thumbnails are
+1. **Episódios** — hero (latest) + `EpisodesSection` grid (recent) on the
+   homepage; full catalogue at `/episodios` (`EpisodeEntry`). Poster cards:
+   big `EP. Nº` numeral, theme tag, title, guest/duration footer. No
+   photography (none was supplied, and gray placeholder thumbnails are
    banned) — the numeral and theme tag carry the visual weight instead.
-2. **Artigos** — `ArticlesSection`, off-white editorial list register
-   (Fredoka titles, Public Sans leads, Pensador bullet, author/date).
-3. **Eventos** — `EventsSection`, two unequal columns: Próximos (empty
-   state when no real date is confirmed — never a fabricated entry) and
-   Anteriores (compact archive list).
+2. **Artigos** — `ArticlesSection` preview on the homepage, off-white
+   editorial list register (Fredoka titles, Public Sans leads, Pensador
+   bullet, author/date); full catalogue with theme filter at `/artigos`
+   (`ArticlesBrowser`), individual reading pages at `/artigos/[slug]`.
+3. **Notícias** — `NoticiasSection` preview on the homepage, dark
+   navy-ink register (distinct from Artigos' paper register): compact
+   dated rows (`NoticiaList`) with theme tag, title, one/two-line summary,
+   date — no author, no reading time, no per-item page, since a notícia is
+   a quick factual update rather than long-form analysis. Full list at
+   `/noticias`.
+4. **Eventos** — `EventsSection` homepage preview (trimmed: up to 2
+   upcoming, 3 past) linking to the full `/eventos` page (`EventList`,
+   unsliced). Two unequal columns: Próximos (empty state when no real date
+   is confirmed — never a fabricated entry) and Anteriores (compact
+   archive list). `EventList` is shared between the preview and the full
+   page so the two-column markup isn't duplicated.
 
 `MissionBand` is the one full-gold section (brief requirement), a short,
 factual statement of purpose tied to the three theme pillars — no invented
