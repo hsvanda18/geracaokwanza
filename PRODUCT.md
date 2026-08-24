@@ -39,7 +39,7 @@ Primary single call-to-action across the page: listen to / watch the latest epis
 - Content categorization: episodes/articles are tagged by theme — ECONOMIA / POLÍTICA / SOCIEDADE — as consistent thematic labels.
 - No real episode, article, event, or platform-link data was supplied at build time. Per explicit user instruction, the build must use **visible placeholder markers** (e.g. `[TÍTULO DO EPISÓDIO]`) rather than inventing plausible-sounding content, metrics, testimonials, or press quotes. Sections with no real content shrink or are omitted rather than filled with fabricated entries.
 - Podcast distribution platforms (YouTube, Spotify, Apple Podcasts, etc.) are unconfirmed — only platforms where the podcast genuinely exists should be shown; this list is currently undecided and marked as a placeholder in the build.
-- Contact/partnership email: `hsvanda18@gmail.com` (confirmed, live in the footer).
+- Contact/partnership email is unconfirmed — undecided, placeholder in the build.
 - Copy must be 100% European/Angolan Portuguese (português de Angola).
 
 ## Brand Commitments

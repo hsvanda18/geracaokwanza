@@ -58,9 +58,13 @@ export function Footer() {
               Parcerias
             </p>
             <p className="mt-4 flex items-center gap-2 font-body text-sm text-paper/80">
-              <a href={`mailto:${contacto.email}`} className="hover:text-gold">
-                {contacto.email}
-              </a>
+              {contacto.emailIsPlaceholder ? (
+                contacto.email
+              ) : (
+                <a href={`mailto:${contacto.email}`} className="hover:text-gold">
+                  {contacto.email}
+                </a>
+              )}
               {contacto.emailIsPlaceholder && (
                 <PlaceholderTag className="border-paper/30 text-paper/50" />
               )}

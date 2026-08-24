@@ -185,8 +185,8 @@ export function tempoDeLeitura(artigo: Artigo): number {
 }
 
 export const contacto = {
-  email: "hsvanda18@gmail.com",
-  emailIsPlaceholder: false,
+  email: "[EMAIL PARA PARCERIAS]",
+  emailIsPlaceholder: true,
   redes: [
     {
       nome: "Facebook",
