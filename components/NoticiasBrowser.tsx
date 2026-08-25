@@ -17,16 +17,14 @@ export function NoticiasBrowser({ noticias }: { noticias: Noticia[] }) {
 
   return (
     <div>
-      <div className="pb-6">
-        <SearchField
-          id="busca-noticias"
-          label="Pesquisar"
-          placeholder="Título ou resumo..."
-          value={busca}
-          onChange={setBusca}
-          dark
-        />
-      </div>
+      <SearchField
+        id="busca-noticias"
+        label="Pesquisar"
+        placeholder="Título ou resumo..."
+        value={busca}
+        onChange={setBusca}
+        dark
+      />
 
       {filtradas.length > 0 ? (
         <NoticiaList noticias={filtradas} />
