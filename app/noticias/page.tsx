@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { KwanzaFrame } from "@/components/icons/KwanzaFrame";
-import { NoticiaList } from "@/components/NoticiaList";
+import { NoticiasBrowser } from "@/components/NoticiasBrowser";
 import { noticias } from "@/lib/content";
 
 export const metadata: Metadata = {
@@ -35,13 +35,7 @@ export default function NoticiasPage() {
 
         <section className="bg-navy-ink pb-16 sm:pb-24">
           <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
-            {noticias.length > 0 ? (
-              <NoticiaList noticias={noticias} />
-            ) : (
-              <p className="py-10 font-body text-sm text-paper/60">
-                Sem notícias publicadas de momento.
-              </p>
-            )}
+            <NoticiasBrowser noticias={noticias} />
           </div>
         </section>
       </main>

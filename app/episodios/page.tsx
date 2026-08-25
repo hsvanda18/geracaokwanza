@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { EpisodeEntry } from "@/components/EpisodeEntry";
+import { EpisodiosBrowser } from "@/components/EpisodiosBrowser";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { KwanzaFrame } from "@/components/icons/KwanzaFrame";
@@ -36,11 +36,7 @@ export default function EpisodiosPage() {
 
         <section className="bg-navy-ink py-4 sm:py-6">
           <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
-            <ul>
-              {episodios.map((ep) => (
-                <EpisodeEntry key={ep.numero} ep={ep} />
-              ))}
-            </ul>
+            <EpisodiosBrowser episodios={episodios} />
           </div>
         </section>
       </main>
