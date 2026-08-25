@@ -28,7 +28,7 @@ export default function ArtigosPage() {
           </div>
         </section>
 
-        <section className="bg-paper pb-16 text-navy sm:pb-24">
+        <section className="bg-paper pt-12 pb-16 text-navy sm:pt-16 sm:pb-24">
           <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
             <ArticlesBrowser artigos={artigos} />
           </div>

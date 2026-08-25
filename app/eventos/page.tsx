@@ -28,7 +28,7 @@ export default function EventosPage() {
           </div>
         </section>
 
-        <section className="bg-navy-ink pb-16 sm:pb-24">
+        <section className="bg-navy-ink pt-12 pb-16 sm:pt-16 sm:pb-24">
           <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
             <EventList proximos={proximosEventos} anteriores={eventosAnteriores} />
           </div>
