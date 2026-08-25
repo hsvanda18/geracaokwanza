@@ -39,20 +39,29 @@ Rule with zero exceptions: white/paper text never sits on gold. Every
 
 ## Signature marks
 
-Two, both original SVG reconstructions — never a pasted copy of the logo
-file:
+Two original SVG reconstructions, used everywhere except the Header/Footer
+brand mark (user-confirmed exception below):
 
 - `components/icons/KwanzaFrame.tsx` — the logo's concentric rounded-corner
   frame, rebuilt as a dashed rounded-rect stroke (round linecaps produce the
   bracket-arm curves) plus four small vesica "seed" shapes at the edge
-  midpoints. Used as a low-opacity background watermark (hero, episodes
-  section) and as the small brand mark icon (header, footer), never as a
-  decorative border on ordinary content.
+  midpoints. Used as a low-opacity background watermark on hero/catalogue
+  sections (Episódios, Notícias), never as a decorative border on ordinary
+  content.
 - `components/icons/Pensador.tsx` — a stylized seated, chin-on-fist
   silhouette. Used as: the favicon (`app/icon.svg`), the section-divider
-  rule (`.pensador-rule`), and the list bullet for articles, notícias, and
-  upcoming events — replacing the generic numbered-list / colored-left-border
-  patterns the craft floor bans.
+  rule (`.pensador-rule`), the Eventos/Artigos hero mark, and the list
+  bullet for articles, notícias, and upcoming events — replacing the
+  generic numbered-list / colored-left-border patterns the craft floor
+  bans.
+
+**Header/Footer exception:** both use the real logo file
+(`public/brand/geracao-kwanza-logo.png`, the supplied full lockup) directly
+via `next/image`, sized with `h-9 w-auto sm:h-10` (Header, `priority` since
+it's above the fold) and `h-10 w-auto` (Footer) — not the deconstructed
+marks. This is the one place the "SVG reconstruction only" rule doesn't
+apply, per explicit brand-owner direction; every other placement of the two
+marks still follows it.
 
 ## Corner & border system
 

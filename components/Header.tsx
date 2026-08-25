@@ -1,9 +1,8 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { KwanzaFrame } from "./icons/KwanzaFrame";
-import { Pensador } from "./icons/Pensador";
 
 const links = [
   { href: "/episodios", label: "Episódios" },
@@ -18,16 +17,15 @@ export function Header() {
   return (
     <header className="sticky top-0 z-40 border-b-2 border-gold/30 bg-navy/95 backdrop-blur">
       <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-4 px-5 py-3 sm:px-8">
-        <Link href="/" className="flex items-center gap-3" onClick={() => setMenuAberto(false)}>
-          <span className="relative flex h-10 w-10 shrink-0 items-center justify-center">
-            <KwanzaFrame size={40} color="var(--color-gold)" strokeWidth={9} seeds={false} />
-            <Pensador size={16} color="var(--color-gold)" className="absolute" />
-          </span>
-          <span className="font-display text-sm leading-[0.95] font-semibold tracking-wide text-paper uppercase">
-            Geração
-            <br />
-            Kwanza
-          </span>
+        <Link href="/" className="flex shrink-0 items-center" onClick={() => setMenuAberto(false)}>
+          <Image
+            src="/brand/geracao-kwanza-logo.png"
+            alt="Geração Kwanza"
+            width={1600}
+            height={901}
+            priority
+            className="h-9 w-auto sm:h-10"
+          />
         </Link>
 
         <nav aria-label="Secções" className="hidden items-center gap-7 md:flex">

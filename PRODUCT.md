@@ -48,14 +48,15 @@ Existing logo assets were supplied (icon mark + full lockup "GERAÇÃO KWANZA"):
 
 The user's briefing fixes the visual direction as binding, not a starting point for reinterpretation:
 - Palette locked to exactly three colors: deep navy `#14243E` (dominant background), vivid yellow `#FFC20E` (equal structural second color — used in full-bleed sections, not just accents), off-white `#F7F5F0` (body text on navy only). No fourth color, no gradients.
-- Two mandatory signature graphic elements, both to be rebuilt as original SVG (never a pasted logo raster used as a design crutch): (1) the logo's concentric rounded-corner frame pattern, deconstructed and reused as a highlight frame / section watermark / subtle background pattern; (2) the Pensador silhouette, used discreetly as a section divider / bullet / favicon element.
+- Two mandatory signature graphic elements, rebuilt as original SVG rather than pasted logo rasters, used everywhere except the Header/Footer brand mark (see below): (1) the logo's concentric rounded-corner frame pattern, deconstructed and reused as a highlight frame / section watermark / subtle background pattern; (2) the Pensador silhouette, used discreetly as a section divider / bullet / favicon element.
+- User-confirmed exception: the Header and Footer brand mark uses the actual supplied logo file (`public/brand/geracao-kwanza-logo.png`) directly, full lockup (icon + wordmark) as one image — not the deconstructed SVG reconstruction. Every other use of the two signature marks (hero/section watermarks, dividers, bullets, favicon) still follows the SVG-only rule above.
 - One consistent corner-radius system (either strongly rounded, echoing the logo, or fully rectangular) — no mixing arbitrary radii.
 - Typography: heavy geometric rounded display face for section titles (uppercase), a legible grotesque/humanist sans for long-form article reading, and large "editorial numeral" treatment for episode numbers (e.g. `EP. 042`).
 - Accessibility-driven contrast rule that is also a brand rule: white text is never placed on the yellow background (fails contrast); navy-on-yellow and yellow-on-navy are the only allowed high-contrast pairings.
 
 ## Evidence on Hand
 
-- Logo assets: icon-only mark and full lockup with wordmark, supplied as images in conversation (saved to `/public/brand/`).
+- Logo asset: full lockup with wordmark, confirmed and supplied as a transparent PNG (saved to `public/brand/geracao-kwanza-logo.png`; 1600×901). No separate icon-only file was supplied.
 - No real episodes, articles, events, platform links, testimonials, or metrics were supplied. Future work must not fabricate any of these — visible placeholders stand in until real content is provided.
 - A competitor/reference site screenshot ("PotShow" podcast template) was supplied explicitly as an anti-reference: its energetic/comedic tone and general layout ideas may inform structure, but its color palette (purple/neon), centered-hero-with-two-buttons pattern, cropped laughing-photo style, invented metrics, and fake testimonial section are explicitly excluded.
 

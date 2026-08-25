@@ -1,6 +1,5 @@
+import Image from "next/image";
 import { contacto, plataformas } from "@/lib/content";
-import { KwanzaFrame } from "./icons/KwanzaFrame";
-import { Pensador } from "./icons/Pensador";
 import { PlaceholderTag } from "./PlaceholderTag";
 
 export function Footer() {
@@ -9,14 +8,14 @@ export function Footer() {
       <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div>
-            <span className="relative flex h-11 w-11 items-center justify-center">
-              <KwanzaFrame size={44} color="var(--color-gold)" strokeWidth={9} seeds={false} />
-              <Pensador size={18} color="var(--color-gold)" className="absolute" />
-            </span>
-            <p className="font-display mt-4 text-lg font-semibold tracking-wide uppercase">
-              Geração Kwanza
-            </p>
-            <p className="mt-2 max-w-[26ch] font-body text-sm leading-relaxed text-paper/60">
+            <Image
+              src="/brand/geracao-kwanza-logo.png"
+              alt="Geração Kwanza"
+              width={1600}
+              height={901}
+              className="h-10 w-auto"
+            />
+            <p className="mt-4 max-w-[26ch] font-body text-sm leading-relaxed text-paper/60">
               Economia, política e sociedade de Angola — a sério.
             </p>
           </div>
