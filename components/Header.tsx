@@ -19,10 +19,10 @@ export function Header() {
       <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-4 px-5 py-3 sm:px-8">
         <Link href="/" className="flex shrink-0 items-center" onClick={() => setMenuAberto(false)}>
           <Image
-            src="/brand/geracao-kwanza-logo.png"
+            src="/brand/geracao-kwanza-icon.png"
             alt="Geração Kwanza"
-            width={1600}
-            height={901}
+            width={859}
+            height={852}
             priority
             className="h-9 w-auto sm:h-10"
           />
