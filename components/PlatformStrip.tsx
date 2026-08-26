@@ -1,7 +1,11 @@
-import { plataformas } from "@/lib/content";
+import { getPlataformas } from "@/lib/sanity/queries";
 import { PlaceholderTag } from "./PlaceholderTag";
 
-export function PlatformStrip() {
+export async function PlatformStrip() {
+  const plataformas = await getPlataformas();
+
+  if (plataformas.length === 0) return null;
+
   return (
     <div className="border-b-2 border-gold/30 bg-navy-ink">
       <div className="mx-auto flex max-w-[1400px] flex-wrap items-center gap-x-8 gap-y-3 px-5 py-4 sm:px-8">

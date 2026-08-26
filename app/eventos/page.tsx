@@ -3,7 +3,7 @@ import { EventList } from "@/components/EventList";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { Pensador } from "@/components/icons/Pensador";
-import { eventosAnteriores, proximosEventos } from "@/lib/content";
+import { getEventosAnteriores, getEventosProximos } from "@/lib/sanity/queries";
 
 export const metadata: Metadata = {
   title: "Eventos — Geração Kwanza",
@@ -11,7 +11,12 @@ export const metadata: Metadata = {
     "Agenda e arquivo de eventos da Geração Kwanza: encontros, conversas e apresentações públicas.",
 };
 
-export default function EventosPage() {
+export default async function EventosPage() {
+  const [proximosEventos, eventosAnteriores] = await Promise.all([
+    getEventosProximos(),
+    getEventosAnteriores(),
+  ]);
+
   return (
     <>
       <Header />

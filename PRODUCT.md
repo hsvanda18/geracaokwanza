@@ -10,6 +10,8 @@ web
 
 Next.js (App Router, TypeScript, Tailwind CSS). User-confirmed choice via structured question (options offered: static HTML/CSS, React+Tailwind/Vite, Next.js).
 
+Content management: Sanity (headless CMS, free tier), chosen so a second, non-technical editor can publish without touching code — see `docs/cms.md` for the full options comparison and rationale. The Studio (the editing UI) is embedded in the app itself at `/studio`, no separate service to host. All content (episódios, artigos, notícias, eventos, plataformas, contacto) is fetched server-side from Sanity via `lib/sanity/queries.ts`; nothing is hardcoded in the app anymore.
+
 ## Users
 
 General audience ("público geral / todos os públicos") — user-confirmed. Not narrowed to youth or academics specifically. Copy register: serious but accessible, no assumption of academic background or niche slang. People interested in Angolan economy, politics, and society who want civic debate content, not entertainment.
@@ -37,9 +39,9 @@ Primary single call-to-action across the page: listen to / watch the latest epis
 ## Capabilities and Constraints
 
 - Content categorization: episodes/articles are tagged by theme — ECONOMIA / POLÍTICA / SOCIEDADE — as consistent thematic labels.
-- No real episode, article, event, or platform-link data was supplied at build time. Per explicit user instruction, the build must use **visible placeholder markers** (e.g. `[TÍTULO DO EPISÓDIO]`) rather than inventing plausible-sounding content, metrics, testimonials, or press quotes. Sections with no real content shrink or are omitted rather than filled with fabricated entries.
-- Podcast distribution platforms (YouTube, Spotify, Apple Podcasts, etc.) are unconfirmed — only platforms where the podcast genuinely exists should be shown; this list is currently undecided and marked as a placeholder in the build.
-- Contact/partnership email is unconfirmed — undecided, placeholder in the build.
+- All content (episódios, artigos, notícias, eventos, plataformas, contacto) now lives in Sanity, not hardcoded — see `docs/cms.md`. Per the original build instruction, nothing was ever fabricated; that principle now takes the form of Sanity documents simply not existing until real content is published, which the site's existing empty-state messages already handle, rather than requiring visible `[BRACKETED]` markers. The one exception still rendering visibly is the "Por preencher" tag on the partnership email in the footer, since that's a single always-present field rather than a collection.
+- Podcast distribution platforms (YouTube, Spotify, Apple Podcasts, etc.): only platforms where the podcast genuinely exists should be shown — now an editorial decision made by adding/removing `plataforma` documents in the Studio, not a build-time constraint.
+- Contact/partnership email is unconfirmed — undecided; editable at `/studio` → Contacto once confirmed.
 - Copy must be 100% European/Angolan Portuguese (português de Angola).
 
 ## Brand Commitments
@@ -57,7 +59,7 @@ The user's briefing fixes the visual direction as binding, not a starting point 
 ## Evidence on Hand
 
 - Logo asset: full lockup with wordmark, confirmed and supplied as a transparent PNG (saved to `public/brand/geracao-kwanza-logo.png`; 1600×901). No separate icon-only file was supplied.
-- No real episodes, articles, events, platform links, testimonials, or metrics were supplied. Future work must not fabricate any of these — visible placeholders stand in until real content is provided.
+- Real data exists for 3 episódios, 1 evento, the YouTube platform link, and social links (Facebook/Instagram/LinkedIn) — migrated into Sanity via `npm run seed`. No real artigos, notícias, or partnership email have been supplied yet; these stay empty in Sanity until confirmed. No testimonials or metrics were ever supplied and none should be fabricated.
 - A competitor/reference site screenshot ("PotShow" podcast template) was supplied explicitly as an anti-reference: its energetic/comedic tone and general layout ideas may inform structure, but its color palette (purple/neon), centered-hero-with-two-buttons pattern, cropped laughing-photo style, invented metrics, and fake testimonial section are explicitly excluded.
 
 ## Product Principles

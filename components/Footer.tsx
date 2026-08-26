@@ -1,8 +1,10 @@
 import Image from "next/image";
-import { contacto, plataformas } from "@/lib/content";
+import { getContacto, getPlataformas } from "@/lib/sanity/queries";
 import { PlaceholderTag } from "./PlaceholderTag";
 
-export function Footer() {
+export async function Footer() {
+  const [plataformas, contacto] = await Promise.all([getPlataformas(), getContacto()]);
+
   return (
     <footer className="border-t-2 border-gold/30 bg-navy py-14 text-paper">
       <div className="mx-auto max-w-[1400px] px-5 sm:px-8">

@@ -3,7 +3,7 @@ import { ArticlesBrowser } from "@/components/ArticlesBrowser";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { Pensador } from "@/components/icons/Pensador";
-import { artigos } from "@/lib/content";
+import { getArtigos } from "@/lib/sanity/queries";
 
 export const metadata: Metadata = {
   title: "Artigos — Geração Kwanza",
@@ -11,7 +11,9 @@ export const metadata: Metadata = {
     "Análise escrita sobre economia, política e sociedade de Angola pela Geração Kwanza.",
 };
 
-export default function ArtigosPage() {
+export default async function ArtigosPage() {
+  const artigos = await getArtigos();
+
   return (
     <>
       <Header />

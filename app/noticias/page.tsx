@@ -3,7 +3,7 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { KwanzaFrame } from "@/components/icons/KwanzaFrame";
 import { NoticiasBrowser } from "@/components/NoticiasBrowser";
-import { noticias } from "@/lib/content";
+import { getNoticias } from "@/lib/sanity/queries";
 
 export const metadata: Metadata = {
   title: "Notícias — Geração Kwanza",
@@ -11,7 +11,9 @@ export const metadata: Metadata = {
     "Atualizações rápidas sobre economia, política e sociedade de Angola pela Geração Kwanza.",
 };
 
-export default function NoticiasPage() {
+export default async function NoticiasPage() {
+  const noticias = await getNoticias();
+
   return (
     <>
       <Header />

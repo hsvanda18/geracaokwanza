@@ -1,3 +1,4 @@
+import { PortableText } from "@portabletext/react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -6,19 +7,17 @@ import { Header } from "@/components/Header";
 import { Pensador } from "@/components/icons/Pensador";
 import { PlaceholderTag } from "@/components/PlaceholderTag";
 import { ThemeTag } from "@/components/ThemeTag";
-import { artigos, tempoDeLeitura } from "@/lib/content";
+import { tempoDeLeitura } from "@/lib/content";
+import { getArtigoBySlug, getArtigoSlugs } from "@/lib/sanity/queries";
 
-function getArtigo(slug: string) {
-  return artigos.find((a) => a.slug === slug);
-}
-
-export function generateStaticParams() {
-  return artigos.map((a) => ({ slug: a.slug }));
+export async function generateStaticParams() {
+  const slugs = await getArtigoSlugs();
+  return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata(props: PageProps<"/artigos/[slug]">): Promise<Metadata> {
   const { slug } = await props.params;
-  const artigo = getArtigo(slug);
+  const artigo = await getArtigoBySlug(slug);
   if (!artigo) return {};
   return {
     title: `${artigo.titulo} — Geração Kwanza`,
@@ -28,7 +27,7 @@ export async function generateMetadata(props: PageProps<"/artigos/[slug]">): Pro
 
 export default async function ArtigoPage(props: PageProps<"/artigos/[slug]">) {
   const { slug } = await props.params;
-  const artigo = getArtigo(slug);
+  const artigo = await getArtigoBySlug(slug);
   if (!artigo) notFound();
 
   return (
@@ -65,9 +64,7 @@ export default async function ArtigoPage(props: PageProps<"/artigos/[slug]">) {
           </div>
 
           <div className="space-y-5 font-body text-[1.05rem] leading-relaxed opacity-90">
-            {artigo.corpo.map((paragrafo, i) => (
-              <p key={i}>{paragrafo}</p>
-            ))}
+            <PortableText value={artigo.corpo} />
           </div>
         </article>
       </main>

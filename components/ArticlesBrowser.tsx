@@ -21,7 +21,9 @@ export function ArticlesBrowser({ artigos }: { artigos: Artigo[] }) {
   const [busca, setBusca] = useState("");
   const [destaque, ...resto] = artigos;
 
-  if (!destaque) return null;
+  if (!destaque) {
+    return <p className="py-10 font-body text-sm text-navy/60">Ainda não há artigos publicados.</p>;
+  }
 
   const emPesquisa = busca.trim().length > 0;
   const base = emPesquisa ? artigos : resto;

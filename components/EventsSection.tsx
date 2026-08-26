@@ -1,11 +1,16 @@
 import Link from "next/link";
-import { eventosAnteriores, proximosEventos } from "@/lib/content";
+import { getEventosAnteriores, getEventosProximos } from "@/lib/sanity/queries";
 import { EventList } from "./EventList";
 
 const PROXIMOS_PREVIEW_LIMIT = 2;
 const ANTERIORES_PREVIEW_LIMIT = 3;
 
-export function EventsSection() {
+export async function EventsSection() {
+  const [proximosEventos, eventosAnteriores] = await Promise.all([
+    getEventosProximos(),
+    getEventosAnteriores(),
+  ]);
+
   return (
     <section id="eventos" className="bg-navy-ink py-16 sm:py-24">
       <div className="mx-auto max-w-[1400px] px-5 sm:px-8">

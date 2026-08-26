@@ -1,10 +1,12 @@
 import Link from "next/link";
-import { artigos } from "@/lib/content";
+import { getArtigos } from "@/lib/sanity/queries";
 import { ArticleList } from "./ArticleList";
 
 const RECENTES_LIMIT = 3;
 
-export function ArticlesSection() {
+export async function ArticlesSection() {
+  const artigos = await getArtigos();
+
   if (artigos.length === 0) return null;
 
   return (

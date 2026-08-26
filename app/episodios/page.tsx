@@ -3,7 +3,7 @@ import { EpisodiosBrowser } from "@/components/EpisodiosBrowser";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { KwanzaFrame } from "@/components/icons/KwanzaFrame";
-import { episodios } from "@/lib/content";
+import { getEpisodios } from "@/lib/sanity/queries";
 
 export const metadata: Metadata = {
   title: "Episódios — Geração Kwanza",
@@ -11,7 +11,9 @@ export const metadata: Metadata = {
     "Todos os episódios da Geração Kwanza, ouve directamente aqui: economia, política e sociedade de Angola.",
 };
 
-export default function EpisodiosPage() {
+export default async function EpisodiosPage() {
+  const episodios = await getEpisodios();
+
   return (
     <>
       <Header />

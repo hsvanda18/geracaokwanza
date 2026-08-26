@@ -107,14 +107,19 @@ instead of showing its full archive inline on the homepage:
 factual statement of purpose tied to the three theme pillars — no invented
 metrics or testimonials.
 
-## Placeholder system
+## Content source
 
-`lib/content.ts` is the single content source. Every field is a bracketed
-placeholder (`[TÍTULO DO EPISÓDIO]`) with `isPlaceholder: true`; components
-read that flag to render a dashed border + "Por preencher" tag so a
-placeholder can never be mistaken for a shipped entry. Replacing the data
-file with real content and flipping the flag is the entire integration
-path — no component code changes needed.
+Sanity is the content source (`lib/sanity/queries.ts`; schemas in
+`sanity/schemaTypes/`, editing UI embedded at `/studio`) — see
+`docs/cms.md` for the full rationale. `lib/content.ts` now only holds the
+shared types and the `tempoDeLeitura` helper. Missing content is simply a
+document that doesn't exist yet in Sanity; the site's existing empty-state
+copy ("Ainda não há artigos...", "Sem eventos agendados...") covers that,
+inherited from the original bracketed-placeholder system rather than
+requiring a visible marker per item. The one surviving visible placeholder
+is the "Por preencher" tag on the partnership email (`PlaceholderTag`,
+`components/Footer.tsx`), since that's a single always-present field, not
+a collection with a natural empty state.
 
 ## Motion
 
@@ -134,6 +139,7 @@ inert-looking) when no real video ID exists yet.
 
 ## Known gaps (by design, not oversight)
 
-No real episodes, articles, events, platform links, or contact email were
-supplied — see `PRODUCT.md` § Evidence on Hand. The page is fully wired to
-receive them via `lib/content.ts`.
+No real artigos, notícias, or contact email have been confirmed yet — see
+`PRODUCT.md` § Evidence on Hand. The site is fully wired to receive them
+the moment they're published in the Studio (`/studio`); no code changes
+needed.

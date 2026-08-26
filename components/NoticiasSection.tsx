@@ -1,10 +1,12 @@
 import Link from "next/link";
-import { noticias } from "@/lib/content";
+import { getNoticias } from "@/lib/sanity/queries";
 import { NoticiaList } from "./NoticiaList";
 
 const RECENTES_LIMIT = 3;
 
-export function NoticiasSection() {
+export async function NoticiasSection() {
+  const noticias = await getNoticias();
+
   if (noticias.length === 0) return null;
 
   return (

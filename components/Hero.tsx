@@ -1,11 +1,13 @@
 import Link from "next/link";
-import { ultimoEpisodio } from "@/lib/content";
+import { getUltimoEpisodio } from "@/lib/sanity/queries";
 import { KwanzaFrame } from "./icons/KwanzaFrame";
 import { ThemeTag } from "./ThemeTag";
 import { VideoFacade } from "./VideoFacade";
 
-export function Hero() {
-  const ep = ultimoEpisodio;
+export async function Hero() {
+  const ep = await getUltimoEpisodio();
+
+  if (!ep) return null;
 
   return (
     <section id="ultimo-episodio" className="relative overflow-hidden border-b-2 border-gold/30 bg-navy">

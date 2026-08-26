@@ -1,10 +1,12 @@
 import Link from "next/link";
-import { episodiosRecentes } from "@/lib/content";
+import { getEpisodiosRecentes } from "@/lib/sanity/queries";
 import { KwanzaFrame } from "./icons/KwanzaFrame";
 import { PlaceholderTag } from "./PlaceholderTag";
 import { ThemeTag } from "./ThemeTag";
 
-export function EpisodesSection() {
+export async function EpisodesSection() {
+  const episodiosRecentes = await getEpisodiosRecentes();
+
   if (episodiosRecentes.length === 0) return null;
 
   return (

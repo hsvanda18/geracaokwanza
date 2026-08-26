@@ -1,5 +1,11 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+Content is managed in Sanity — copy `.env.local.example` to `.env.local`
+and fill in your project ID before running the app, or every page will
+fail to fetch its content. See [`docs/cms.md`](docs/cms.md) for the full
+setup (including seeding the site's real starter content) and why Sanity
+was chosen.
+
 ## Getting Started
 
 First, run the development server:
