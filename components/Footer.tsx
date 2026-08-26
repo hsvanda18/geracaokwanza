@@ -18,7 +18,7 @@ export async function Footer() {
               className="h-10 w-auto"
             />
             <p className="mt-4 max-w-[26ch] font-body text-sm leading-relaxed text-paper/60">
-              Economia, política e sociedade de Angola — a sério.
+              Vivendo e pensando Angola
             </p>
           </div>
 
