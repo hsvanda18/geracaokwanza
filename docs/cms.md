@@ -48,6 +48,23 @@ non-technical-editor-friendly of the free options.
   published yet, so the existing empty-state messages ("Ainda não há
   artigos...", "Sem eventos agendados...") cover that case instead of a
   visible bracket placeholder.
+- A `noticia` can optionally reference a specific `evento` ("Evento
+  relacionado" in the Studio). Each event row on `/eventos` has a stable
+  anchor id from the event's `slug` field, and a linked notícia shows a
+  small "Evento: [nome] →" chip pointing at it.
+
+## Caching
+
+`lib/sanity/client.ts` exports `sanityFetch()`, used by every function in
+`lib/sanity/queries.ts` instead of calling `client.fetch()` directly. It
+applies `next: { revalidate: 60 }` to every query — without this, Next.js's
+default fetch caching keeps the *first* result forever, so an edit
+published in the Studio would never reach the live site without a server
+restart. This was caught and fixed during testing; the build output
+confirms it (`Revalidate 1m` next to every route). A change in the Studio
+takes up to 60 seconds to show up on the live site — normal ISR behavior,
+not a bug. An on-demand revalidation webhook (instant instead of ≤60s) is
+a possible future upgrade, not implemented.
 
 ## Running it
 
