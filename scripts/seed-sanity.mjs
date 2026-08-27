@@ -77,6 +77,7 @@ const documentos = [
     _id: "evento-dinheiro-nao-fala-kimbundo",
     _type: "evento",
     nome: "Dinheiro Não Fala Kimbundo?",
+    slug: { _type: "slug", current: "dinheiro-nao-fala-kimbundo" },
     dataHora: "2026-08-02T16:00:00+01:00",
     local: "Café Lu-Andu, Rua Direita do Patriota",
   },

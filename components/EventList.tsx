@@ -28,7 +28,7 @@ export function EventList({
         ) : (
           <ul className="space-y-6">
             {proximos.map((ev, i) => (
-              <li key={i} className="flex items-start gap-3">
+              <li key={i} id={`evento-${ev.slug}`} className="scroll-mt-24 flex items-start gap-3">
                 <Pensador size={16} color="var(--color-gold)" className="mt-1.5 shrink-0" />
                 <div>
                   <p className="font-display text-lg font-semibold text-paper">{ev.nome}</p>
@@ -55,7 +55,8 @@ export function EventList({
             {anteriores.map((ev, i) => (
               <li
                 key={i}
-                className={`flex items-start justify-between gap-4 border-b border-paper/10 pb-4 ${
+                id={`evento-${ev.slug}`}
+                className={`scroll-mt-24 flex items-start justify-between gap-4 border-b border-paper/10 pb-4 ${
                   ev.isPlaceholder ? "opacity-60" : ""
                 }`}
               >

@@ -1,7 +1,7 @@
 import { groq } from "next-sanity";
 import type { PortableTextBlock } from "@portabletext/types";
 import type { Artigo, Episodio, Evento, Noticia, Plataforma, Tema } from "../content";
-import { client } from "./client";
+import { sanityFetch } from "./client";
 import { formatarData, formatarDataHora } from "./format";
 
 type EpisodioDoc = {
@@ -30,9 +30,11 @@ type NoticiaDoc = {
   data: string;
   tema: Tema;
   href: string | null;
+  evento: { nome: string; slug: string } | null;
 };
 
 type EventoDoc = {
+  slug: string;
   nome: string;
   dataHora: string;
   local: string;
@@ -82,12 +84,14 @@ function mapNoticia(doc: NoticiaDoc): Noticia {
     data: formatarData(doc.data),
     tema: doc.tema,
     href: doc.href ?? undefined,
+    eventoRelacionado: doc.evento ?? undefined,
     isPlaceholder: false,
   };
 }
 
 function mapEvento(doc: EventoDoc): Evento {
   return {
+    slug: doc.slug,
     nome: doc.nome,
     data: formatarDataHora(doc.dataHora),
     local: doc.local,
@@ -105,19 +109,19 @@ const EPISODIO_PROJECTION = groq`{
 }`;
 
 export async function getUltimoEpisodio(): Promise<Episodio | null> {
-  const destaque = await client.fetch<EpisodioDoc | null>(
+  const destaque = await sanityFetch<EpisodioDoc | null>(
     groq`*[_type == "episodio" && destaque == true] | order(numero desc)[0] ${EPISODIO_PROJECTION}`,
   );
   if (destaque) return mapEpisodio(destaque);
 
-  const maisRecente = await client.fetch<EpisodioDoc | null>(
+  const maisRecente = await sanityFetch<EpisodioDoc | null>(
     groq`*[_type == "episodio"] | order(numero desc)[0] ${EPISODIO_PROJECTION}`,
   );
   return maisRecente ? mapEpisodio(maisRecente) : null;
 }
 
 export async function getEpisodiosRecentes(limite = 3): Promise<Episodio[]> {
-  const docs = await client.fetch<EpisodioDoc[]>(
+  const docs = await sanityFetch<EpisodioDoc[]>(
     groq`*[_type == "episodio" && destaque != true] | order(numero desc)[0...$limite] ${EPISODIO_PROJECTION}`,
     { limite },
   );
@@ -125,7 +129,7 @@ export async function getEpisodiosRecentes(limite = 3): Promise<Episodio[]> {
 }
 
 export async function getEpisodios(): Promise<Episodio[]> {
-  const docs = await client.fetch<EpisodioDoc[]>(
+  const docs = await sanityFetch<EpisodioDoc[]>(
     groq`*[_type == "episodio"] | order(numero desc) ${EPISODIO_PROJECTION}`,
   );
   return docs.map(mapEpisodio);
@@ -136,12 +140,12 @@ const ARTIGO_PROJECTION = groq`{
 }`;
 
 export async function getArtigos(): Promise<Artigo[]> {
-  const docs = await client.fetch<ArtigoDoc[]>(groq`*[_type == "artigo"] | order(data desc) ${ARTIGO_PROJECTION}`);
+  const docs = await sanityFetch<ArtigoDoc[]>(groq`*[_type == "artigo"] | order(data desc) ${ARTIGO_PROJECTION}`);
   return docs.map(mapArtigo);
 }
 
 export async function getArtigoBySlug(slug: string): Promise<Artigo | null> {
-  const doc = await client.fetch<ArtigoDoc | null>(
+  const doc = await sanityFetch<ArtigoDoc | null>(
     groq`*[_type == "artigo" && slug.current == $slug][0] ${ARTIGO_PROJECTION}`,
     { slug },
   );
@@ -149,32 +153,38 @@ export async function getArtigoBySlug(slug: string): Promise<Artigo | null> {
 }
 
 export async function getArtigoSlugs(): Promise<string[]> {
-  return client.fetch<string[]>(groq`*[_type == "artigo"].slug.current`);
+  return sanityFetch<string[]>(groq`*[_type == "artigo"].slug.current`);
 }
 
+const NOTICIA_PROJECTION = groq`{
+  titulo, resumo, data, tema, href, "evento": evento->{ nome, "slug": slug.current }
+}`;
+
 export async function getNoticias(): Promise<Noticia[]> {
-  const docs = await client.fetch<NoticiaDoc[]>(
-    groq`*[_type == "noticia"] | order(data desc) { titulo, resumo, data, tema, href }`,
-  );
+  const docs = await sanityFetch<NoticiaDoc[]>(groq`*[_type == "noticia"] | order(data desc) ${NOTICIA_PROJECTION}`);
   return docs.map(mapNoticia);
 }
 
+const EVENTO_PROJECTION = groq`{
+  "slug": slug.current, nome, dataHora, local, href
+}`;
+
 export async function getEventosProximos(): Promise<Evento[]> {
-  const docs = await client.fetch<EventoDoc[]>(
-    groq`*[_type == "evento" && dataHora >= now()] | order(dataHora asc) { nome, dataHora, local, href }`,
+  const docs = await sanityFetch<EventoDoc[]>(
+    groq`*[_type == "evento" && dataHora >= now()] | order(dataHora asc) ${EVENTO_PROJECTION}`,
   );
   return docs.map(mapEvento);
 }
 
 export async function getEventosAnteriores(): Promise<Evento[]> {
-  const docs = await client.fetch<EventoDoc[]>(
-    groq`*[_type == "evento" && dataHora < now()] | order(dataHora desc) { nome, dataHora, local, href }`,
+  const docs = await sanityFetch<EventoDoc[]>(
+    groq`*[_type == "evento" && dataHora < now()] | order(dataHora desc) ${EVENTO_PROJECTION}`,
   );
   return docs.map(mapEvento);
 }
 
 export async function getPlataformas(): Promise<Plataforma[]> {
-  const docs = await client.fetch<PlataformaDoc[]>(
+  const docs = await sanityFetch<PlataformaDoc[]>(
     groq`*[_type == "plataforma"] | order(ordem asc) { nome, href }`,
   );
   return docs.map(mapPlataforma);
@@ -185,7 +195,7 @@ export async function getContacto(): Promise<{
   emailIsPlaceholder: boolean;
   redes: { nome: string; href: string; isPlaceholder: boolean }[];
 }> {
-  const doc = await client.fetch<ContactoDoc | null>(
+  const doc = await sanityFetch<ContactoDoc | null>(
     groq`*[_type == "contacto"][0] { email, redes }`,
   );
   return {

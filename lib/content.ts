@@ -34,6 +34,7 @@ export type Artigo = {
 };
 
 export type Evento = {
+  slug: string;
   nome: string;
   data: string;
   local: string;
@@ -47,6 +48,8 @@ export type Noticia = {
   data: string;
   tema: Tema;
   href?: string;
+  /** Set when this notícia is about a specific evento — links to it on /eventos. */
+  eventoRelacionado?: { nome: string; slug: string };
   isPlaceholder: boolean;
 };
 

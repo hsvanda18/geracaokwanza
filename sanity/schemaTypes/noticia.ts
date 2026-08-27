@@ -39,6 +39,13 @@ export const noticia = defineType({
       type: "url",
       description: "Opcional — se preenchido, a notícia liga para a fonte original.",
     }),
+    defineField({
+      name: "evento",
+      title: "Evento relacionado",
+      type: "reference",
+      to: [{ type: "evento" }],
+      description: "Opcional — se esta notícia é sobre um evento específico, liga-a aqui.",
+    }),
   ],
   preview: {
     select: { title: "titulo", subtitle: "tema" },

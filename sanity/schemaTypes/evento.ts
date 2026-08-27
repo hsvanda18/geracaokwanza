@@ -12,6 +12,14 @@ export const evento = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: "slug",
+      title: "Slug",
+      type: "slug",
+      description: "Usado para ligar a este evento a partir de notícias relacionadas.",
+      options: { source: "nome", maxLength: 96 },
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: "dataHora",
       title: "Data e hora",
       type: "datetime",

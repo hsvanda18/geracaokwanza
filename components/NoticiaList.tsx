@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { Noticia } from "@/lib/content";
 import { Pensador } from "./icons/Pensador";
 import { PlaceholderTag } from "./PlaceholderTag";
@@ -21,8 +22,14 @@ export function NoticiaList({ noticias }: { noticias: Noticia[] }) {
 }
 
 function Row({ noticia }: { noticia: Noticia }) {
-  const content = (
-    <>
+  const temLinks = noticia.eventoRelacionado || noticia.href;
+
+  return (
+    <div
+      className={`flex flex-col gap-3 py-6 sm:flex-row sm:items-start sm:gap-4 ${
+        noticia.isPlaceholder ? "opacity-70" : ""
+      }`}
+    >
       <Pensador size={18} color="var(--color-paper)" className="mt-1 shrink-0 opacity-30" />
       <div className="flex-1">
         <div className="flex flex-wrap items-center gap-3">
@@ -35,24 +42,32 @@ function Row({ noticia }: { noticia: Noticia }) {
         <p className="mt-1 max-w-2xl font-body text-sm leading-relaxed text-paper/70">
           {noticia.resumo}
         </p>
+        {temLinks && (
+          <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-1">
+            {noticia.eventoRelacionado && (
+              <Link
+                href={`/eventos#evento-${noticia.eventoRelacionado.slug}`}
+                className="font-body text-xs font-semibold tracking-wide text-gold uppercase transition-colors hover:text-paper"
+              >
+                Evento: {noticia.eventoRelacionado.nome} →
+              </Link>
+            )}
+            {noticia.href && (
+              <a
+                href={noticia.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-body text-xs font-semibold tracking-wide text-paper/50 uppercase transition-colors hover:text-gold"
+              >
+                Fonte ↗
+              </a>
+            )}
+          </div>
+        )}
       </div>
       <span className="font-body text-xs font-semibold whitespace-nowrap text-paper/50 sm:text-right">
         {noticia.data}
       </span>
-    </>
+    </div>
   );
-
-  const className =
-    "group flex flex-col gap-3 py-6 sm:flex-row sm:items-start sm:gap-4" +
-    (noticia.isPlaceholder ? " opacity-70" : "");
-
-  if (noticia.href) {
-    return (
-      <a href={noticia.href} target="_blank" rel="noopener noreferrer" className={`${className} hover:opacity-80`}>
-        {content}
-      </a>
-    );
-  }
-
-  return <div className={className}>{content}</div>;
 }
