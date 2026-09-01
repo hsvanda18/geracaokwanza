@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import type { Imagem } from "@/lib/content";
+import { ExpandIcon } from "./icons/Expand";
 
 export function ImageGallery({ imagens }: { imagens: Imagem[] }) {
   const [aberta, setAberta] = useState<number | null>(null);
@@ -105,13 +106,5 @@ export function ImageGallery({ imagens }: { imagens: Imagem[] }) {
         </div>
       )}
     </>
-  );
-}
-
-function ExpandIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
-      <path d="M6 2H2v4M10 2h4v4M6 14H2v-4M10 14h4v-4" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
   );
 }
