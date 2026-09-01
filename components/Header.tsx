@@ -16,7 +16,7 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-40 border-b-2 border-gold/30 bg-navy/95 backdrop-blur">
-      <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-4 px-5 py-3 sm:px-8">
+      <div className="mx-auto grid max-w-[1400px] grid-cols-[auto_1fr_auto] items-center gap-4 px-5 py-3 sm:px-8">
         <Link href="/" className="flex shrink-0 items-center" onClick={() => setMenuAberto(false)}>
           <Image
             src="/brand/geracao-kwanza-icon.png"
@@ -28,7 +28,7 @@ export function Header() {
           />
         </Link>
 
-        <nav aria-label="Secções" className="hidden items-center gap-7 md:flex">
+        <nav aria-label="Secções" className="hidden items-center justify-center gap-7 md:flex">
           {links.map((link) => (
             <Link
               key={link.href}
@@ -40,7 +40,7 @@ export function Header() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center justify-self-end gap-3">
           <Link
             href="/episodios"
             className="border-2 border-gold px-4 py-2 font-body text-xs font-bold tracking-[0.1em] text-gold uppercase transition-colors hover:bg-gold hover:text-navy sm:text-sm"
