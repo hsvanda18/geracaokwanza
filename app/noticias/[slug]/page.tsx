@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { ImageGallery } from "@/components/ImageGallery";
 import { Pensador } from "@/components/icons/Pensador";
 import { PlaceholderTag } from "@/components/PlaceholderTag";
 import { ThemeTag } from "@/components/ThemeTag";
@@ -65,6 +66,8 @@ export default async function NoticiaPage(props: PageProps<"/noticias/[slug]">) 
           ) : (
             <p className="font-body text-xl leading-relaxed font-medium opacity-90">{noticia.resumo}</p>
           )}
+
+          {noticia.imagens && noticia.imagens.length > 0 && <ImageGallery imagens={noticia.imagens} />}
 
           {temLinks && (
             <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-2 border-t-2 border-navy/10 pt-6">

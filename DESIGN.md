@@ -93,9 +93,16 @@ instead of showing its full archive inline on the homepage:
 3. **Notícias** — `NoticiasSection` preview on the homepage, dark
    navy-ink register (distinct from Artigos' paper register): compact
    dated rows (`NoticiaList`) with theme tag, title, one/two-line summary,
-   date — no author, no reading time, no per-item page, since a notícia is
-   a quick factual update rather than long-form analysis. Full list at
-   `/noticias`.
+   date — no author, no reading time, since a notícia is a quick factual
+   update rather than long-form analysis. Full list at `/noticias`, each
+   with its own detail page at `/noticias/[slug]` (full corpo when set,
+   else the resumo). Photography is optional and real-photo-only (`imagens`
+   in the Studio, same "no fabricated/stock imagery" rule as text) — a
+   `Row` shows the first photo as a small cover thumbnail in place of the
+   Pensador bullet, and the detail page shows the full set via
+   `ImageGallery`. Artigos support the same `imagens` field and
+   `ImageGallery` on `/artigos/[slug]` for parity, once real photos exist
+   for one.
 4. **Eventos** — `EventsSection` homepage preview (trimmed: up to 2
    upcoming, 3 past) linking to the full `/eventos` page (`EventList`,
    unsliced). Two unequal columns: Próximos (empty state when no real date

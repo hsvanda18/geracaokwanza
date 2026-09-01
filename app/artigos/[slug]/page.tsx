@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { ImageGallery } from "@/components/ImageGallery";
 import { Pensador } from "@/components/icons/Pensador";
 import { PlaceholderTag } from "@/components/PlaceholderTag";
 import { ThemeTag } from "@/components/ThemeTag";
@@ -66,6 +67,8 @@ export default async function ArtigoPage(props: PageProps<"/artigos/[slug]">) {
           <div className="space-y-5 font-body text-[1.05rem] leading-relaxed opacity-90">
             <PortableText value={artigo.corpo} />
           </div>
+
+          {artigo.imagens && artigo.imagens.length > 0 && <ImageGallery imagens={artigo.imagens} />}
         </article>
       </main>
       <Footer />

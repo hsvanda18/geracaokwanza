@@ -52,6 +52,12 @@ non-technical-editor-friendly of the free options.
   relacionado" in the Studio). Each event row on `/eventos` has a stable
   anchor id from the event's `slug` field, and a linked notícia shows a
   small "Evento: [nome] →" chip pointing at it.
+- `noticia` and `artigo` both have an optional "Fotos" (`imagens`) field —
+  real photos only, uploaded through the Studio's image field (drag and
+  drop or click to browse). `next.config.ts` allows images from
+  `cdn.sanity.io`. A notícia's first photo shows as a small cover
+  thumbnail in the listing; both types show the full set as a grid on
+  their detail page.
 
 ## Caching
 

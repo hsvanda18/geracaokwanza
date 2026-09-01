@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { Noticia } from "@/lib/content";
 import { Pensador } from "./icons/Pensador";
@@ -23,6 +24,7 @@ export function NoticiaList({ noticias }: { noticias: Noticia[] }) {
 
 function Row({ noticia }: { noticia: Noticia }) {
   const temLinks = noticia.eventoRelacionado || noticia.href;
+  const capa = noticia.imagens?.[0];
 
   return (
     <div
@@ -30,7 +32,17 @@ function Row({ noticia }: { noticia: Noticia }) {
         noticia.isPlaceholder ? "opacity-70" : ""
       }`}
     >
-      <Pensador size={18} color="var(--color-paper)" className="mt-1 shrink-0 opacity-30" />
+      {capa ? (
+        <Image
+          src={capa.url}
+          alt={capa.alt ?? ""}
+          width={64}
+          height={64}
+          className="h-16 w-16 shrink-0 border-2 border-paper/20 object-cover"
+        />
+      ) : (
+        <Pensador size={18} color="var(--color-paper)" className="mt-1 shrink-0 opacity-30" />
+      )}
       <div className="flex-1">
         <div className="flex flex-wrap items-center gap-3">
           <ThemeTag tema={noticia.tema} />

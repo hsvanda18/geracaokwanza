@@ -1,8 +1,25 @@
 import { groq } from "next-sanity";
 import type { PortableTextBlock } from "@portabletext/types";
-import type { Artigo, Episodio, Evento, Noticia, Plataforma, Tema } from "../content";
+import type { Artigo, Episodio, Evento, Imagem, Noticia, Plataforma, Tema } from "../content";
 import { sanityFetch } from "./client";
 import { formatarData, formatarDataHora } from "./format";
+
+type ImagemDoc = { url: string; largura: number | null; altura: number | null; alt: string | null };
+
+const IMAGENS_PROJECTION = groq`imagens[]{
+  "url": asset->url, "largura": asset->metadata.dimensions.width,
+  "altura": asset->metadata.dimensions.height, alt
+}`;
+
+function mapImagens(docs: ImagemDoc[] | null): Imagem[] | undefined {
+  if (!docs || docs.length === 0) return undefined;
+  return docs.map((doc) => ({
+    url: doc.url,
+    largura: doc.largura ?? 0,
+    altura: doc.altura ?? 0,
+    alt: doc.alt ?? undefined,
+  }));
+}
 
 type EpisodioDoc = {
   numero: string;
@@ -19,6 +36,7 @@ type ArtigoDoc = {
   titulo: string;
   lead: string;
   corpo: PortableTextBlock[];
+  imagens: ImagemDoc[] | null;
   autor: string;
   data: string;
   tema: Tema;
@@ -29,6 +47,7 @@ type NoticiaDoc = {
   titulo: string;
   resumo: string;
   corpo: PortableTextBlock[] | null;
+  imagens: ImagemDoc[] | null;
   data: string;
   tema: Tema;
   href: string | null;
@@ -72,6 +91,7 @@ function mapArtigo(doc: ArtigoDoc): Artigo {
     titulo: doc.titulo,
     lead: doc.lead,
     corpo: doc.corpo ?? [],
+    imagens: mapImagens(doc.imagens),
     autor: doc.autor,
     data: formatarData(doc.data),
     tema: doc.tema,
@@ -85,6 +105,7 @@ function mapNoticia(doc: NoticiaDoc): Noticia {
     titulo: doc.titulo,
     resumo: doc.resumo,
     corpo: doc.corpo ?? undefined,
+    imagens: mapImagens(doc.imagens),
     data: formatarData(doc.data),
     tema: doc.tema,
     href: doc.href ?? undefined,
@@ -140,7 +161,7 @@ export async function getEpisodios(): Promise<Episodio[]> {
 }
 
 const ARTIGO_PROJECTION = groq`{
-  "slug": slug.current, titulo, lead, corpo, autor, data, tema
+  "slug": slug.current, titulo, lead, corpo, ${IMAGENS_PROJECTION}, autor, data, tema
 }`;
 
 export async function getArtigos(): Promise<Artigo[]> {
@@ -161,7 +182,7 @@ export async function getArtigoSlugs(): Promise<string[]> {
 }
 
 const NOTICIA_PROJECTION = groq`{
-  "slug": slug.current, titulo, resumo, corpo, data, tema, href,
+  "slug": slug.current, titulo, resumo, corpo, ${IMAGENS_PROJECTION}, data, tema, href,
   "evento": evento->{ nome, "slug": slug.current }
 }`;
 

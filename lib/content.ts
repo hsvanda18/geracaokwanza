@@ -10,6 +10,13 @@ export type Tema = "ECONOMIA" | "POLÍTICA" | "SOCIEDADE";
 
 export const TEMAS: Tema[] = ["ECONOMIA", "POLÍTICA", "SOCIEDADE"];
 
+export type Imagem = {
+  url: string;
+  largura: number;
+  altura: number;
+  alt?: string;
+};
+
 export type Episodio = {
   numero: string;
   titulo: string;
@@ -27,6 +34,7 @@ export type Artigo = {
   titulo: string;
   lead: string;
   corpo: PortableTextBlock[];
+  imagens?: Imagem[];
   autor: string;
   data: string;
   tema: Tema;
@@ -48,6 +56,7 @@ export type Noticia = {
   resumo: string;
   /** Optional longer-form content for the detail page; falls back to `resumo` when absent. */
   corpo?: PortableTextBlock[];
+  imagens?: Imagem[];
   data: string;
   tema: Tema;
   href?: string;

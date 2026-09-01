@@ -50,6 +50,19 @@ export const noticia = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: "imagens",
+      title: "Fotos",
+      type: "array",
+      of: [
+        {
+          type: "image",
+          options: { hotspot: true },
+          fields: [defineField({ name: "alt", title: "Texto alternativo", type: "string" })],
+        },
+      ],
+      description: "Opcional — fotos do evento ou da reportagem.",
+    }),
+    defineField({
       name: "href",
       title: "Link da fonte",
       type: "url",

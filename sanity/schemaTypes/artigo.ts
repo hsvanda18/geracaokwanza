@@ -36,6 +36,19 @@ export const artigo = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: "imagens",
+      title: "Fotos",
+      type: "array",
+      of: [
+        {
+          type: "image",
+          options: { hotspot: true },
+          fields: [defineField({ name: "alt", title: "Texto alternativo", type: "string" })],
+        },
+      ],
+      description: "Opcional — fotos que acompanham o artigo.",
+    }),
+    defineField({
       name: "autor",
       title: "Autor",
       type: "string",
