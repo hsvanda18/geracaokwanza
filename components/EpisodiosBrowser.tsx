@@ -29,7 +29,7 @@ export function EpisodiosBrowser({ episodios }: { episodios: Episodio[] }) {
       </div>
 
       {filtrados.length > 0 ? (
-        <ul>
+        <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {filtrados.map((ep) => (
             <EpisodeEntry key={ep.numero} ep={ep} />
           ))}

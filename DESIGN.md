@@ -81,11 +81,17 @@ Artigos, and Notícias each pair a homepage preview section with a dedicated
 full-listing page; Eventos follows the same preview-plus-page pattern
 instead of showing its full archive inline on the homepage:
 
-1. **Episódios** — hero (latest) + `EpisodesSection` grid (recent) on the
-   homepage; full catalogue at `/episodios` (`EpisodeEntry`). Poster cards:
-   big `EP. Nº` numeral, theme tag, title, guest/duration footer. No
-   photography (none was supplied, and gray placeholder thumbnails are
-   banned) — the numeral and theme tag carry the visual weight instead.
+1. **Episódios** — hero (latest, `VideoFacade`) + `EpisodesSection` grid
+   (recent) on the homepage: text-only poster cards (big `EP. Nº` numeral,
+   theme tag, title, guest/duration footer) — no photography there, the
+   numeral and theme tag carry the visual weight. Full catalogue at
+   `/episodios` is a YouTube-style thumbnail grid (`EpisodeEntry`, 1/2/3
+   columns): the real YouTube thumbnail for each video (`img.youtube.com`,
+   not stock/fabricated imagery — it's the video's own real image) with a
+   play control; clicking opens `VideoLightbox`, a cinema-mode overlay
+   shared with `VideoFacade`'s "maximizar" control on the hero/inline
+   players. An episódio without a `youtubeId` yet falls back to the
+   dashed-stripe poster treatment instead of a broken thumbnail.
 2. **Artigos** — `ArticlesSection` preview on the homepage, off-white
    editorial list register (Fredoka titles, Public Sans leads, Pensador
    bullet, author/date); full catalogue with theme filter at `/artigos`

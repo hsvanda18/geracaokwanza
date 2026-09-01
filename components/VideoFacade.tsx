@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ExpandIcon } from "./icons/Expand";
+import { VideoLightbox } from "./VideoLightbox";
 
 type VideoFacadeProps = {
   youtubeId?: string;
@@ -16,21 +17,12 @@ const EMBED_ALLOW =
  * Lazy-load facade for the embedded episode player: renders a thumbnail and
  * play control only, and mounts the actual YouTube iframe solely after a
  * click — never on page load. A separate "maximizar" control opens the same
- * video larger, in a cinema-mode overlay, whether or not it's already
- * playing inline.
+ * video larger, in a cinema-mode overlay (VideoLightbox), whether or not
+ * it's already playing inline.
  */
 export function VideoFacade({ youtubeId, title, className = "" }: VideoFacadeProps) {
   const [playing, setPlaying] = useState(false);
   const [maximizado, setMaximizado] = useState(false);
-
-  useEffect(() => {
-    if (!maximizado) return;
-    function onKeyDown(e: KeyboardEvent) {
-      if (e.key === "Escape") setMaximizado(false);
-    }
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, [maximizado]);
 
   return (
     <>
@@ -91,35 +83,13 @@ export function VideoFacade({ youtubeId, title, className = "" }: VideoFacadePro
         )}
       </div>
 
-      {maximizado && youtubeId && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          onClick={() => setMaximizado(false)}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-navy/95 p-4 sm:p-8"
-        >
-          <button
-            type="button"
-            onClick={() => setMaximizado(false)}
-            aria-label="Fechar"
-            className="absolute top-4 right-4 flex h-10 w-10 items-center justify-center border-2 border-paper/30 text-paper transition-colors hover:border-gold hover:text-gold sm:top-6 sm:right-6"
-          >
-            ✕
-          </button>
-
-          <div
-            className="aspect-video w-full max-w-5xl border-2 border-gold"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <iframe
-              className="h-full w-full"
-              src={`https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=1`}
-              title={title}
-              allow={EMBED_ALLOW}
-              allowFullScreen
-            />
-          </div>
-        </div>
+      {youtubeId && (
+        <VideoLightbox
+          youtubeId={youtubeId}
+          title={title}
+          open={maximizado}
+          onClose={() => setMaximizado(false)}
+        />
       )}
     </>
   );
