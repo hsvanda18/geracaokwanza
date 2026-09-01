@@ -61,51 +61,45 @@ export function ImageGallery({ imagens }: { imagens: Imagem[] }) {
             ✕
           </button>
 
-          {imagens.length > 1 && (
-            <>
-              <button
-                type="button"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setAberta((i) => (i === null ? i : (i - 1 + imagens.length) % imagens.length));
-                }}
-                aria-label="Foto anterior"
-                className="absolute top-1/2 left-2 flex h-10 w-10 -translate-y-1/2 items-center justify-center border-2 border-paper/30 text-paper transition-colors hover:border-gold hover:text-gold sm:left-6"
-              >
-                ←
-              </button>
-              <button
-                type="button"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setAberta((i) => (i === null ? i : (i + 1) % imagens.length));
-                }}
-                aria-label="Foto seguinte"
-                className="absolute top-1/2 right-2 flex h-10 w-10 -translate-y-1/2 items-center justify-center border-2 border-paper/30 text-paper transition-colors hover:border-gold hover:text-gold sm:right-6"
-              >
-                →
-              </button>
-            </>
-          )}
-
-          <div className="relative max-h-[80vh] max-w-full" onClick={(e) => e.stopPropagation()}>
+          <div className="relative max-h-[60vh] max-w-full sm:max-h-[75vh]" onClick={(e) => e.stopPropagation()}>
             <Image
               src={imagens[aberta].url}
               alt={imagens[aberta].alt ?? ""}
               width={imagens[aberta].largura || 1600}
               height={imagens[aberta].altura || 1200}
-              className="h-auto max-h-[80vh] w-auto max-w-full object-contain"
+              className="h-auto max-h-[60vh] w-auto max-w-full object-contain sm:max-h-[75vh]"
             />
           </div>
 
-          <div className="flex flex-col items-center gap-1 text-center">
+          <div
+            className="flex w-full max-w-md flex-col items-center gap-3 text-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {imagens.length > 1 && (
+              <div className="flex items-center gap-6">
+                <button
+                  type="button"
+                  onClick={() => setAberta((i) => (i === null ? i : (i - 1 + imagens.length) % imagens.length))}
+                  aria-label="Foto anterior"
+                  className="flex h-10 w-10 shrink-0 items-center justify-center border-2 border-paper/30 text-paper transition-colors hover:border-gold hover:text-gold"
+                >
+                  ←
+                </button>
+                <p className="font-body text-xs font-semibold tracking-wide text-paper/50 uppercase">
+                  {aberta + 1} / {imagens.length}
+                </p>
+                <button
+                  type="button"
+                  onClick={() => setAberta((i) => (i === null ? i : (i + 1) % imagens.length))}
+                  aria-label="Foto seguinte"
+                  className="flex h-10 w-10 shrink-0 items-center justify-center border-2 border-paper/30 text-paper transition-colors hover:border-gold hover:text-gold"
+                >
+                  →
+                </button>
+              </div>
+            )}
             {imagens[aberta].alt && (
               <p className="max-w-xl font-body text-sm text-paper/70">{imagens[aberta].alt}</p>
-            )}
-            {imagens.length > 1 && (
-              <p className="font-body text-xs font-semibold tracking-wide text-paper/50 uppercase">
-                {aberta + 1} / {imagens.length}
-              </p>
             )}
           </div>
         </div>
