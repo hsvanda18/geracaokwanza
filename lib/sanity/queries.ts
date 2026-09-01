@@ -160,6 +160,14 @@ export async function getEpisodios(): Promise<Episodio[]> {
   return docs.map(mapEpisodio);
 }
 
+export async function getEpisodioByNumero(numero: string): Promise<Episodio | null> {
+  const doc = await sanityFetch<EpisodioDoc | null>(
+    groq`*[_type == "episodio" && numero == $numero][0] ${EPISODIO_PROJECTION}`,
+    { numero },
+  );
+  return doc ? mapEpisodio(doc) : null;
+}
+
 const ARTIGO_PROJECTION = groq`{
   "slug": slug.current, titulo, lead, corpo, ${IMAGENS_PROJECTION}, autor, data, tema
 }`;

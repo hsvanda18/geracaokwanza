@@ -37,7 +37,7 @@ export async function EpisodesSection() {
           {episodiosRecentes.map((ep, i) => (
             <li key={i}>
               <Link
-                href={`/episodios#ep-${ep.numero}`}
+                href={`/episodios/${ep.numero}`}
                 className={`group flex h-full flex-col border-2 p-6 transition-colors ${
                   ep.isPlaceholder
                     ? "border-dashed border-gold/50"

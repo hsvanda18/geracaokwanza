@@ -88,10 +88,15 @@ instead of showing its full archive inline on the homepage:
    `/episodios` is a YouTube-style thumbnail grid (`EpisodeEntry`, 1/2/3
    columns): the real YouTube thumbnail for each video (`img.youtube.com`,
    not stock/fabricated imagery — it's the video's own real image) with a
-   play control; clicking opens `VideoLightbox`, a cinema-mode overlay
-   shared with `VideoFacade`'s "maximizar" control on the hero/inline
-   players. An episódio without a `youtubeId` yet falls back to the
-   dashed-stripe poster treatment instead of a broken thumbnail.
+   play control. Clicking a card — from the grid, the homepage, or the
+   "Mais episódios" list — navigates to that episode's own watch page at
+   `/episodios/[numero]` (`VideoFacade` full-size, title, temas,
+   guest/duration, YouTube link, plus a "Mais episódios" grid of the other
+   episodes below), rather than playing inline in the small grid cell.
+   `VideoLightbox`, the cinema-mode overlay, is reserved for `VideoFacade`'s
+   own "maximizar" control (hero, inline, and watch-page players). An
+   episódio without a `youtubeId` yet falls back to the dashed-stripe
+   poster treatment instead of a broken thumbnail.
 2. **Artigos** — `ArticlesSection` preview on the homepage, off-white
    editorial list register (Fredoka titles, Public Sans leads, Pensador
    bullet, author/date); full catalogue with theme filter at `/artigos`
