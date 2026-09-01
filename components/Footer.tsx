@@ -29,7 +29,12 @@ export async function Footer() {
             <ul className="mt-4 space-y-2">
               {plataformas.map((p, i) => (
                 <li key={i} className="flex items-center gap-2">
-                  <a href={p.href} className="font-body text-sm text-paper/80 hover:text-gold">
+                  <a
+                    href={p.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-body text-sm text-paper/80 hover:text-gold"
+                  >
                     {p.nome}
                   </a>
                   {p.isPlaceholder && <PlaceholderTag className="border-paper/30 text-paper/50" />}
@@ -45,7 +50,12 @@ export async function Footer() {
             <ul className="mt-4 space-y-2">
               {contacto.redes.map((r, i) => (
                 <li key={i} className="flex items-center gap-2">
-                  <a href={r.href} className="font-body text-sm text-paper/80 hover:text-gold">
+                  <a
+                    href={r.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-body text-sm text-paper/80 hover:text-gold"
+                  >
                     {r.nome}
                   </a>
                   {r.isPlaceholder && <PlaceholderTag className="border-paper/30 text-paper/50" />}

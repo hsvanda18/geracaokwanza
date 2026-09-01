@@ -22,9 +22,16 @@ export async function generateMetadata(props: PageProps<"/artigos/[slug]">): Pro
   const { slug } = await props.params;
   const artigo = await getArtigoBySlug(slug);
   if (!artigo) return {};
+  const imagem = artigo.imagens?.[0];
   return {
     title: `${artigo.titulo} — Geração Kwanza`,
     description: artigo.lead,
+    openGraph: {
+      title: artigo.titulo,
+      description: artigo.lead,
+      type: "article",
+      ...(imagem && { images: [imagem.url] }),
+    },
   };
 }
 

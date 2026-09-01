@@ -29,7 +29,7 @@ Not comedy, not entertainment — civic debate with strong editorial identity. P
 Four content types, in this fixed priority order:
 1. **Episódios** (recorded video/audio) — primary, protagonist content type.
 2. **Artigos** — written analysis, editorial register.
-3. **Notícias** — short, dated factual updates (title, one/two-line summary, date, theme tag); no full body, no dedicated per-item page — a quick-update register, distinct from Artigos' long-form analysis.
+3. **Notícias** — dated factual updates (title, one/two-line summary, date, theme tag), a quicker register than Artigos; each has its own page at `/noticias/[slug]` with an optional longer corpo (falls back to the resumo when unset) and optional photos.
 4. **Eventos** — past (archive) and future (agenda), shown as two unequal columns (upcoming vs. past), not merged.
 
 Episódios, Artigos, and Notícias each get a homepage preview (recent items + "Ver todos/todas" link) plus a dedicated full-listing page (`/episodios`, `/artigos`, `/noticias`). Eventos follows the same preview-plus-dedicated-page pattern (`/eventos`) rather than showing its full archive inline on the homepage.
@@ -51,15 +51,15 @@ Existing logo assets were supplied (icon mark + full lockup "GERAÇÃO KWANZA"):
 The user's briefing fixes the visual direction as binding, not a starting point for reinterpretation:
 - Palette locked to exactly three colors: deep navy `#14243E` (dominant background), vivid yellow `#FFC20E` (equal structural second color — used in full-bleed sections, not just accents), off-white `#F7F5F0` (body text on navy only). No fourth color, no gradients.
 - Two mandatory signature graphic elements, rebuilt as original SVG rather than pasted logo rasters, used everywhere except the Header/Footer brand mark (see below): (1) the logo's concentric rounded-corner frame pattern, deconstructed and reused as a highlight frame / section watermark / subtle background pattern; (2) the Pensador silhouette, used discreetly as a section divider / bullet / favicon element.
-- User-confirmed exception: the Header and Footer brand mark uses the actual supplied logo file (`public/brand/geracao-kwanza-logo.png`) directly, full lockup (icon + wordmark) as one image — not the deconstructed SVG reconstruction. Every other use of the two signature marks (hero/section watermarks, dividers, bullets, favicon) still follows the SVG-only rule above.
+- User-confirmed exception: the Header and Footer brand mark uses an actual supplied logo file directly — not the deconstructed SVG reconstruction. The Footer uses the full lockup (icon + wordmark, `geracao-kwanza-logo.png`); the Header uses the icon-only mark (`geracao-kwanza-icon.png`), per a later, more specific user request. Every other use of the two signature marks (hero/section watermarks, dividers, bullets, favicon) still follows the SVG-only rule above.
 - One consistent corner-radius system (either strongly rounded, echoing the logo, or fully rectangular) — no mixing arbitrary radii.
 - Typography: heavy geometric rounded display face for section titles (uppercase), a legible grotesque/humanist sans for long-form article reading, and large "editorial numeral" treatment for episode numbers (e.g. `EP. 042`).
 - Accessibility-driven contrast rule that is also a brand rule: white text is never placed on the yellow background (fails contrast); navy-on-yellow and yellow-on-navy are the only allowed high-contrast pairings.
 
 ## Evidence on Hand
 
-- Logo asset: full lockup with wordmark, confirmed and supplied as a transparent PNG (saved to `public/brand/geracao-kwanza-logo.png`; 1600×901). No separate icon-only file was supplied.
-- Real data exists for 3 episódios, 1 evento, the YouTube platform link, and social links (Facebook/Instagram/LinkedIn) — migrated into Sanity via `npm run seed`. No real artigos, notícias, or partnership email have been supplied yet; these stay empty in Sanity until confirmed. No testimonials or metrics were ever supplied and none should be fabricated.
+- Logo assets: full lockup with wordmark (`public/brand/geracao-kwanza-logo.png`, 1600×901, used in the Footer) and a separate icon-only mark supplied later (`public/brand/geracao-kwanza-icon.png`, 859×852, used in the Header) — both real, both confirmed by the site owner.
+- Real data exists for 3 episódios (each with its own `/episodios/[numero]` watch page), 1 evento, the YouTube platform link, social links (Facebook/Instagram/LinkedIn), 2 real artigos (each with a real `autor` document — no photo/bio supplied for either yet), and 1 real notícia (linked to its evento, with full corpo). Partnership email is still unconfirmed and stays a visible placeholder. No testimonials or metrics were ever supplied and none should be fabricated.
 - A competitor/reference site screenshot ("PotShow" podcast template) was supplied explicitly as an anti-reference: its energetic/comedic tone and general layout ideas may inform structure, but its color palette (purple/neon), centered-hero-with-two-buttons pattern, cropped laughing-photo style, invented metrics, and fake testimonial section are explicitly excluded.
 
 ## Product Principles

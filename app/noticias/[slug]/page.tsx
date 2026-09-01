@@ -20,9 +20,16 @@ export async function generateMetadata(props: PageProps<"/noticias/[slug]">): Pr
   const { slug } = await props.params;
   const noticia = await getNoticiaBySlug(slug);
   if (!noticia) return {};
+  const imagem = noticia.imagens?.[0];
   return {
     title: `${noticia.titulo} — Geração Kwanza`,
     description: noticia.resumo,
+    openGraph: {
+      title: noticia.titulo,
+      description: noticia.resumo,
+      type: "article",
+      ...(imagem && { images: [imagem.url] }),
+    },
   };
 }
 

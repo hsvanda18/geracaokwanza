@@ -16,6 +16,8 @@ export async function PlatformStrip() {
           <a
             key={i}
             href={p.href}
+            target="_blank"
+            rel="noopener noreferrer"
             className="flex items-center gap-2 font-body text-sm font-semibold text-paper/80 transition-colors hover:text-gold"
           >
             {p.nome}

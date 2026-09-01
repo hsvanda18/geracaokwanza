@@ -18,9 +18,16 @@ export async function generateMetadata(props: PageProps<"/episodios/[numero]">):
   const { numero } = await props.params;
   const ep = await getEpisodioByNumero(numero);
   if (!ep) return {};
+  const descricao = ep.convidado !== ep.titulo ? `Com ${ep.convidado}. ${ep.duracao}.` : ep.duracao;
   return {
     title: `${ep.titulo} — Geração Kwanza`,
-    description: ep.convidado !== ep.titulo ? `Com ${ep.convidado}. ${ep.duracao}.` : ep.duracao,
+    description: descricao,
+    openGraph: {
+      title: ep.titulo,
+      description: descricao,
+      type: "video.other",
+      ...(ep.youtubeId && { images: [`https://img.youtube.com/vi/${ep.youtubeId}/hqdefault.jpg`] }),
+    },
   };
 }
 

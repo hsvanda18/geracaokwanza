@@ -35,6 +35,16 @@ export function EventList({
                   <p className="mt-1 font-body text-sm text-paper/70">
                     {ev.data} · {ev.local}
                   </p>
+                  {ev.href && (
+                    <a
+                      href={ev.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-2 inline-block font-body text-xs font-semibold tracking-wide text-gold uppercase transition-colors hover:text-paper"
+                    >
+                      Mais informações ↗
+                    </a>
+                  )}
                 </div>
               </li>
             ))}
@@ -65,6 +75,16 @@ export function EventList({
                   <p className="mt-0.5 font-body text-xs text-paper/60">
                     {ev.data} · {ev.local}
                   </p>
+                  {ev.href && (
+                    <a
+                      href={ev.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-1 inline-block font-body text-xs font-semibold tracking-wide text-paper/50 uppercase transition-colors hover:text-gold"
+                    >
+                      Mais informações ↗
+                    </a>
+                  )}
                 </div>
                 {ev.isPlaceholder && (
                   <PlaceholderTag className="shrink-0 border-paper/30 text-paper/50" />

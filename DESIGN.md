@@ -156,7 +156,7 @@ inert-looking) when no real video ID exists yet.
 
 ## Known gaps (by design, not oversight)
 
-No real artigos, notícias, or contact email have been confirmed yet — see
-`PRODUCT.md` § Evidence on Hand. The site is fully wired to receive them
-the moment they're published in the Studio (`/studio`); no code changes
-needed.
+Partnership email is still unconfirmed — see `PRODUCT.md` § Evidence on
+Hand. Neither real autor (António Eusébio, Josemar Djundo) has a photo or
+bio yet. The site is fully wired to receive both the moment they're
+published in the Studio (`/studio`); no code changes needed.
