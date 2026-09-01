@@ -78,6 +78,15 @@ takes up to 60 seconds to show up on the live site — normal ISR behavior,
 not a bug. An on-demand revalidation webhook (instant instead of ≤60s) is
 a possible future upgrade, not implemented.
 
+## Editor manual
+
+[`docs/manual-cms.pdf`](manual-cms.pdf) is a step-by-step guide to the
+Studio for a non-technical editor — every field for every content type,
+in Portuguese, with a schematic diagram of each form (labeled as
+illustrative, not a real screenshot — the Studio requires a Sanity login,
+which can't be captured automatically). Hand this to the second editor
+instead of walking them through the schema files.
+
 ## Running it
 
 1. Copy `.env.local.example` to `.env.local` and fill in
