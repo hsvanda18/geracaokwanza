@@ -2,10 +2,10 @@ import Image from "next/image";
 import type { Autor } from "@/lib/content";
 import { Pensador } from "./icons/Pensador";
 
-/** Closing "about the author" card — credits the artigo's author with a centered photo, name and bio, when set. */
+/** "About the author" card — credits the artigo's author with a centered photo, name and bio, when set. */
 export function AuthorBio({ autor }: { autor: Autor }) {
   return (
-    <div className="mt-12 flex flex-col items-center border-t-2 border-navy/10 pt-10 text-center">
+    <div className="mt-8 flex flex-col items-center border-t-2 border-b-2 border-navy/10 py-8 text-center">
       <p className="font-body text-xs font-semibold tracking-wide text-navy/50 uppercase">Sobre o autor</p>
 
       {autor.foto ? (

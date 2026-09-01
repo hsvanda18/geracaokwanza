@@ -62,6 +62,8 @@ export default async function ArtigoPage(props: PageProps<"/artigos/[slug]">) {
             <ShareButtons path={`/artigos/${artigo.slug}`} titulo={artigo.titulo} dark />
           </div>
 
+          <AuthorBio autor={artigo.autor} />
+
           <p className="mt-8 font-body text-xl leading-relaxed font-medium opacity-90">
             {artigo.lead}
           </p>
@@ -75,8 +77,6 @@ export default async function ArtigoPage(props: PageProps<"/artigos/[slug]">) {
           </div>
 
           {artigo.imagens && artigo.imagens.length > 0 && <ImageGallery imagens={artigo.imagens} />}
-
-          <AuthorBio autor={artigo.autor} />
         </article>
       </main>
       <Footer />
