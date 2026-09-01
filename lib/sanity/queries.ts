@@ -1,15 +1,19 @@
 import { groq } from "next-sanity";
 import type { PortableTextBlock } from "@portabletext/types";
-import type { Artigo, Episodio, Evento, Imagem, Noticia, Plataforma, Tema } from "../content";
+import type { Artigo, Autor, Episodio, Evento, Imagem, Noticia, Plataforma, Tema } from "../content";
 import { sanityFetch } from "./client";
 import { formatarData, formatarDataHora } from "./format";
 
-type ImagemDoc = { url: string; largura: number | null; altura: number | null; alt: string | null };
+type FotoDoc = { url: string; largura: number | null; altura: number | null };
+type ImagemDoc = FotoDoc & { alt: string | null };
 
-const IMAGENS_PROJECTION = groq`imagens[]{
-  "url": asset->url, "largura": asset->metadata.dimensions.width,
-  "altura": asset->metadata.dimensions.height, alt
-}`;
+const IMAGEM_CAMPOS = groq`"url": asset->url, "largura": asset->metadata.dimensions.width, "altura": asset->metadata.dimensions.height`;
+const IMAGENS_PROJECTION = groq`imagens[]{ ${IMAGEM_CAMPOS}, alt }`;
+
+function mapFoto(doc: FotoDoc | null | undefined): Imagem | undefined {
+  if (!doc) return undefined;
+  return { url: doc.url, largura: doc.largura ?? 0, altura: doc.altura ?? 0 };
+}
 
 function mapImagens(docs: ImagemDoc[] | null): Imagem[] | undefined {
   if (!docs || docs.length === 0) return undefined;
@@ -19,6 +23,14 @@ function mapImagens(docs: ImagemDoc[] | null): Imagem[] | undefined {
     altura: doc.altura ?? 0,
     alt: doc.alt ?? undefined,
   }));
+}
+
+type AutorDoc = { nome: string; foto: FotoDoc | null; bio: string | null } | null;
+
+const AUTOR_PROJECTION = groq`"autor": autor->{ nome, foto{ ${IMAGEM_CAMPOS} }, bio }`;
+
+function mapAutor(doc: AutorDoc): Autor {
+  return { nome: doc?.nome ?? "", foto: mapFoto(doc?.foto), bio: doc?.bio ?? undefined };
 }
 
 type EpisodioDoc = {
@@ -37,7 +49,7 @@ type ArtigoDoc = {
   lead: string;
   corpo: PortableTextBlock[];
   imagens: ImagemDoc[] | null;
-  autor: string;
+  autor: AutorDoc;
   data: string;
   tema: Tema;
 };
@@ -92,7 +104,7 @@ function mapArtigo(doc: ArtigoDoc): Artigo {
     lead: doc.lead,
     corpo: doc.corpo ?? [],
     imagens: mapImagens(doc.imagens),
-    autor: doc.autor,
+    autor: mapAutor(doc.autor),
     data: formatarData(doc.data),
     tema: doc.tema,
     isPlaceholder: false,
@@ -169,7 +181,7 @@ export async function getEpisodioByNumero(numero: string): Promise<Episodio | nu
 }
 
 const ARTIGO_PROJECTION = groq`{
-  "slug": slug.current, titulo, lead, corpo, ${IMAGENS_PROJECTION}, autor, data, tema
+  "slug": slug.current, titulo, lead, corpo, ${IMAGENS_PROJECTION}, ${AUTOR_PROJECTION}, data, tema
 }`;
 
 export async function getArtigos(): Promise<Artigo[]> {

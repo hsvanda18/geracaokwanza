@@ -1,7 +1,9 @@
 /**
  * One-off migration: publishes the two real artigos supplied by the site
  * owner (previously only PDFs) as Sanity documents with proper Portable
- * Text. Safe to re-run — fixed _id per article, createOrReplace.
+ * Text, plus an autor document per author (referenced from each artigo —
+ * no photo/bio yet, fill those in via the Studio). Safe to re-run — fixed
+ * _id per document, createOrReplace.
  *
  * Requires the same env vars as scripts/seed-sanity.mjs.
  * Run with: node scripts/seed-artigos.mjs
@@ -25,6 +27,9 @@ if (!projectId || !token) {
 }
 
 const client = createClient({ projectId, dataset, apiVersion: "2026-01-01", token, useCdn: false });
+
+const autorAntonio = { _id: "autor-antonio-eusebio", _type: "autor", nome: "António Eusébio" };
+const autorJosemar = { _id: "autor-josemar-djundo", _type: "autor", nome: "Josemar Djundo" };
 
 let contadorChave = 0;
 function chave(prefixo = "k") {
@@ -62,7 +67,7 @@ const artigoSeguros = {
   titulo: "Overview ao Sector Segurador Angolano: Desafios e Oportunidades num Mercado em Transformação",
   slug: { _type: "slug", current: "overview-sector-segurador-angolano" },
   lead: "O sector segurador angolano cresce em volume de prémios, mas continua com baixa penetração e inclusão financeira. Um retrato do estado do sector, os seus desafios estruturais e as oportunidades de transformação.",
-  autor: "António Eusébio",
+  autor: { _type: "reference", _ref: autorAntonio._id },
   data: "2026-06-01",
   tema: "ECONOMIA",
   corpo: [
@@ -164,7 +169,7 @@ const artigoJuventude = {
   titulo: "Juventude Qualificada e Sem Rumo: Aonde a Bússola Falhou?",
   slug: { _type: "slug", current: "juventude-qualificada-sem-rumo" },
   lead: "Angola tem hoje os jovens mais qualificados da sua história e, ao mesmo tempo, uma das taxas de desemprego juvenil mais altas do continente. Uma reflexão sobre a distância entre a formação e o mercado, e sobre a crise de propósito de uma geração à espera de ser encontrada.",
-  autor: "Josemar Djundo",
+  autor: { _type: "reference", _ref: autorJosemar._id },
   data: "2026-05-01",
   tema: "SOCIEDADE",
   corpo: [
@@ -208,9 +213,9 @@ const artigoJuventude = {
   ],
 };
 
-for (const doc of [artigoSeguros, artigoJuventude]) {
+for (const doc of [autorAntonio, autorJosemar, artigoSeguros, artigoJuventude]) {
   await client.createOrReplace(doc);
-  console.log(`✓ artigo/${doc._id}`);
+  console.log(`✓ ${doc._type}/${doc._id}`);
 }
 
-console.log("\nFeito — 2 artigos publicados.");
+console.log("\nFeito — 2 autores e 2 artigos publicados.");

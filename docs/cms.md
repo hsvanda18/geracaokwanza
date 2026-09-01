@@ -41,6 +41,12 @@ non-technical-editor-friendly of the free options.
   (calendar picker in the Studio), formatted for display via
   `lib/sanity/format.ts` — previously these were free-text Portuguese
   strings the editor had to type correctly by hand.
+- `Artigo.autor` is a reference to a standalone `autor` document (nome,
+  foto opcional, bio opcional) instead of a plain string, so the same
+  person can be reused across articles and credited with a photo/bio —
+  `AuthorBio` renders that as a byline card at the end of `/artigos/[slug]`.
+  Both real artigos reference a real `autor` document today; neither has a
+  photo or bio yet (add them in the Studio — nothing was invented).
 - The `isPlaceholder` flag and `PlaceholderTag` component (the dashed
   border / "Por preencher" tag) are kept for backward compatibility in the
   presentational components, but every Sanity-sourced item now reports

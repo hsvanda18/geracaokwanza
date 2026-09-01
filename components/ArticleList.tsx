@@ -29,7 +29,7 @@ export function ArticleList({ artigos }: { artigos: Artigo[] }) {
             </div>
 
             <div className="font-body text-sm font-semibold whitespace-nowrap opacity-70 sm:text-right">
-              {artigo.autor}
+              {artigo.autor.nome}
               <br />
               {artigo.data}
               <br />

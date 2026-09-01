@@ -51,7 +51,8 @@ export const artigo = defineType({
     defineField({
       name: "autor",
       title: "Autor",
-      type: "string",
+      type: "reference",
+      to: [{ type: "autor" }],
       validation: (Rule) => Rule.required(),
     }),
     defineField({

@@ -44,7 +44,7 @@ export function ArticlesBrowser({ artigos }: { artigos: Artigo[] }) {
           </h2>
           <p className="mt-4 max-w-2xl font-body text-lg leading-relaxed opacity-80">{destaque.lead}</p>
           <p className="mt-4 font-body text-sm font-semibold opacity-60">
-            {destaque.autor} · {destaque.data} · {tempoDeLeitura(destaque)} min de leitura
+            {destaque.autor.nome} · {destaque.data} · {tempoDeLeitura(destaque)} min de leitura
           </p>
         </Link>
       )}

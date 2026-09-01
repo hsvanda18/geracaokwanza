@@ -2,6 +2,7 @@ import { PortableText } from "@portabletext/react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { AuthorBio } from "@/components/AuthorBio";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { ImageGallery } from "@/components/ImageGallery";
@@ -53,7 +54,7 @@ export default async function ArtigoPage(props: PageProps<"/artigos/[slug]">) {
           </h1>
 
           <p className="mt-4 font-body text-sm font-semibold opacity-70">
-            {artigo.autor} · {artigo.data} · {tempoDeLeitura(artigo)} min de leitura
+            {artigo.autor.nome} · {artigo.data} · {tempoDeLeitura(artigo)} min de leitura
           </p>
 
           <p className="mt-8 font-body text-xl leading-relaxed font-medium opacity-90">
@@ -69,6 +70,8 @@ export default async function ArtigoPage(props: PageProps<"/artigos/[slug]">) {
           </div>
 
           {artigo.imagens && artigo.imagens.length > 0 && <ImageGallery imagens={artigo.imagens} />}
+
+          <AuthorBio autor={artigo.autor} />
         </article>
       </main>
       <Footer />

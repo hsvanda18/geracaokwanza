@@ -17,6 +17,12 @@ export type Imagem = {
   alt?: string;
 };
 
+export type Autor = {
+  nome: string;
+  foto?: Imagem;
+  bio?: string;
+};
+
 export type Episodio = {
   numero: string;
   titulo: string;
@@ -35,7 +41,7 @@ export type Artigo = {
   lead: string;
   corpo: PortableTextBlock[];
   imagens?: Imagem[];
-  autor: string;
+  autor: Autor;
   data: string;
   tema: Tema;
   isPlaceholder: boolean;
