@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { EpisodeEntry } from "@/components/EpisodeEntry";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { ShareButtons } from "@/components/ShareButtons";
 import { ThemeTag } from "@/components/ThemeTag";
 import { VideoFacade } from "@/components/VideoFacade";
 import { getEpisodioByNumero, getEpisodios } from "@/lib/sanity/queries";
@@ -74,6 +75,10 @@ export default async function EpisodioPage(props: PageProps<"/episodios/[numero]
               Ver no YouTube ↗
             </a>
           )}
+
+          <div className="mt-6">
+            <ShareButtons path={`/episodios/${ep.numero}`} titulo={ep.titulo} />
+          </div>
         </div>
 
         {outros.length > 0 && (

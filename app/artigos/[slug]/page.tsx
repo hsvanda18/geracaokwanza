@@ -8,6 +8,7 @@ import { Header } from "@/components/Header";
 import { ImageGallery } from "@/components/ImageGallery";
 import { Pensador } from "@/components/icons/Pensador";
 import { PlaceholderTag } from "@/components/PlaceholderTag";
+import { ShareButtons } from "@/components/ShareButtons";
 import { ThemeTag } from "@/components/ThemeTag";
 import { tempoDeLeitura } from "@/lib/content";
 import { getArtigoBySlug, getArtigoSlugs } from "@/lib/sanity/queries";
@@ -56,6 +57,10 @@ export default async function ArtigoPage(props: PageProps<"/artigos/[slug]">) {
           <p className="mt-4 font-body text-sm font-semibold opacity-70">
             {artigo.autor.nome} · {artigo.data} · {tempoDeLeitura(artigo)} min de leitura
           </p>
+
+          <div className="mt-5">
+            <ShareButtons path={`/artigos/${artigo.slug}`} titulo={artigo.titulo} dark />
+          </div>
 
           <p className="mt-8 font-body text-xl leading-relaxed font-medium opacity-90">
             {artigo.lead}

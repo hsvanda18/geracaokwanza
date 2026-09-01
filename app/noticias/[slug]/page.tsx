@@ -7,6 +7,7 @@ import { Header } from "@/components/Header";
 import { ImageGallery } from "@/components/ImageGallery";
 import { Pensador } from "@/components/icons/Pensador";
 import { PlaceholderTag } from "@/components/PlaceholderTag";
+import { ShareButtons } from "@/components/ShareButtons";
 import { ThemeTag } from "@/components/ThemeTag";
 import { getNoticiaBySlug, getNoticiaSlugs } from "@/lib/sanity/queries";
 
@@ -54,6 +55,10 @@ export default async function NoticiaPage(props: PageProps<"/noticias/[slug]">) 
           </h1>
 
           <p className="mt-4 font-body text-sm font-semibold opacity-70">{noticia.data}</p>
+
+          <div className="mt-5">
+            <ShareButtons path={`/noticias/${noticia.slug}`} titulo={noticia.titulo} dark />
+          </div>
 
           <div className="pensador-rule my-8 text-navy/30">
             <Pensador size={18} color="var(--color-navy)" className="opacity-50" />
