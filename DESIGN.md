@@ -81,15 +81,14 @@ Artigos, and Notícias each pair a homepage preview section with a dedicated
 full-listing page; Eventos follows the same preview-plus-page pattern
 instead of showing its full archive inline on the homepage:
 
-1. **Episódios** — hero (latest, `VideoFacade`) + `EpisodesSection` grid
-   (recent) on the homepage: text-only poster cards (big `EP. Nº` numeral,
-   theme tag, title, guest/duration footer) — no photography there, the
-   numeral and theme tag carry the visual weight. Full catalogue at
-   `/episodios` is a YouTube-style thumbnail grid (`EpisodeEntry`, 1/2/3
+1. **Episódios** — hero (latest, `VideoFacade`) on the homepage, then
+   `EpisodesSection` (recent) and the full catalogue at `/episodios` share
+   the exact same YouTube-style thumbnail grid card (`EpisodeEntry`, 1/2/3
    columns): the real YouTube thumbnail for each video (`img.youtube.com`,
-   not stock/fabricated imagery — it's the video's own real image) with a
-   play control. Clicking a card — from the grid, the homepage, or the
-   "Mais episódios" list — navigates to that episode's own watch page at
+   not stock/fabricated imagery — it's the video's own real image), an
+   `EP. Nº` badge, theme tags, title, guest/duration. Clicking a card —
+   from the homepage, the `/episodios` grid, or the "Mais episódios" list —
+   navigates to that episode's own watch page at
    `/episodios/[numero]` (`VideoFacade` full-size, title, temas,
    guest/duration, YouTube link, plus a "Mais episódios" grid of the other
    episodes below), rather than playing inline in the small grid cell.
