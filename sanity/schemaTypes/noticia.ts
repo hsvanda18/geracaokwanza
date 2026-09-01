@@ -77,6 +77,6 @@ export const noticia = defineType({
     }),
   ],
   preview: {
-    select: { title: "titulo", subtitle: "tema" },
+    select: { title: "titulo", subtitle: "tema", media: "imagens.0" },
   },
 });
