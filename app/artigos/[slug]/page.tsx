@@ -45,7 +45,9 @@ export default async function ArtigoPage(props: PageProps<"/artigos/[slug]">) {
             ← Artigos
           </Link>
 
-          <div className="mt-6 flex flex-wrap items-center gap-3">
+          <AuthorBio autor={artigo.autor} />
+
+          <div className="mt-8 flex flex-wrap items-center gap-3">
             <ThemeTag tema={artigo.tema} dark />
             {artigo.isPlaceholder && <PlaceholderTag className="border-navy/30 text-navy/50" />}
           </div>
@@ -61,8 +63,6 @@ export default async function ArtigoPage(props: PageProps<"/artigos/[slug]">) {
           <div className="mt-5">
             <ShareButtons path={`/artigos/${artigo.slug}`} titulo={artigo.titulo} dark />
           </div>
-
-          <AuthorBio autor={artigo.autor} />
 
           <p className="mt-8 font-body text-xl leading-relaxed font-medium opacity-90">
             {artigo.lead}
