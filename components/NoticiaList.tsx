@@ -37,7 +37,9 @@ function Row({ noticia }: { noticia: Noticia }) {
           {noticia.isPlaceholder && <PlaceholderTag className="border-paper/30 text-paper/50" />}
         </div>
         <h3 className="font-display mt-2 text-lg leading-snug font-semibold text-paper">
-          {noticia.titulo}
+          <Link href={`/noticias/${noticia.slug}`} className="transition-colors hover:text-gold">
+            {noticia.titulo}
+          </Link>
         </h3>
         <p className="mt-1 max-w-2xl font-body text-sm leading-relaxed text-paper/70">
           {noticia.resumo}

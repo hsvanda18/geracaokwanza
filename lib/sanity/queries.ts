@@ -25,8 +25,10 @@ type ArtigoDoc = {
 };
 
 type NoticiaDoc = {
+  slug: string;
   titulo: string;
   resumo: string;
+  corpo: PortableTextBlock[] | null;
   data: string;
   tema: Tema;
   href: string | null;
@@ -79,8 +81,10 @@ function mapArtigo(doc: ArtigoDoc): Artigo {
 
 function mapNoticia(doc: NoticiaDoc): Noticia {
   return {
+    slug: doc.slug,
     titulo: doc.titulo,
     resumo: doc.resumo,
+    corpo: doc.corpo ?? undefined,
     data: formatarData(doc.data),
     tema: doc.tema,
     href: doc.href ?? undefined,
@@ -157,12 +161,25 @@ export async function getArtigoSlugs(): Promise<string[]> {
 }
 
 const NOTICIA_PROJECTION = groq`{
-  titulo, resumo, data, tema, href, "evento": evento->{ nome, "slug": slug.current }
+  "slug": slug.current, titulo, resumo, corpo, data, tema, href,
+  "evento": evento->{ nome, "slug": slug.current }
 }`;
 
 export async function getNoticias(): Promise<Noticia[]> {
   const docs = await sanityFetch<NoticiaDoc[]>(groq`*[_type == "noticia"] | order(data desc) ${NOTICIA_PROJECTION}`);
   return docs.map(mapNoticia);
+}
+
+export async function getNoticiaBySlug(slug: string): Promise<Noticia | null> {
+  const doc = await sanityFetch<NoticiaDoc | null>(
+    groq`*[_type == "noticia" && slug.current == $slug][0] ${NOTICIA_PROJECTION}`,
+    { slug },
+  );
+  return doc ? mapNoticia(doc) : null;
+}
+
+export async function getNoticiaSlugs(): Promise<string[]> {
+  return sanityFetch<string[]>(groq`*[_type == "noticia"].slug.current`);
 }
 
 const EVENTO_PROJECTION = groq`{

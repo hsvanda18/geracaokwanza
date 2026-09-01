@@ -43,8 +43,11 @@ export type Evento = {
 };
 
 export type Noticia = {
+  slug: string;
   titulo: string;
   resumo: string;
+  /** Optional longer-form content for the detail page; falls back to `resumo` when absent. */
+  corpo?: PortableTextBlock[];
   data: string;
   tema: Tema;
   href?: string;
