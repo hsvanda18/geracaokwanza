@@ -1,3 +1,4 @@
+import { PortableText } from "@portabletext/react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -59,6 +60,12 @@ export default async function EventoPage(props: PageProps<"/eventos/[slug]">) {
           <div className="mt-5">
             <ShareButtons path={`/eventos/${evento.slug}`} titulo={evento.nome} />
           </div>
+
+          {evento.descricao && evento.descricao.length > 0 && (
+            <div className="mt-8 space-y-4 font-body leading-relaxed text-paper/85">
+              <PortableText value={evento.descricao} />
+            </div>
+          )}
 
           {evento.href && (
             <a

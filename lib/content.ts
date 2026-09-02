@@ -52,6 +52,7 @@ export type Evento = {
   nome: string;
   data: string;
   local: string;
+  descricao?: PortableTextBlock[];
   href?: string;
   isPlaceholder: boolean;
 };

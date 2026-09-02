@@ -71,6 +71,7 @@ type EventoDoc = {
   nome: string;
   dataHora: string;
   local: string;
+  descricao: PortableTextBlock[] | null;
   href: string | null;
 };
 
@@ -132,6 +133,7 @@ function mapEvento(doc: EventoDoc): Evento {
     nome: doc.nome,
     data: formatarDataHora(doc.dataHora),
     local: doc.local,
+    descricao: doc.descricao ?? undefined,
     href: doc.href ?? undefined,
     isPlaceholder: false,
   };
@@ -224,7 +226,7 @@ export async function getNoticiaSlugs(): Promise<string[]> {
 }
 
 const EVENTO_PROJECTION = groq`{
-  "slug": slug.current, nome, dataHora, local, href
+  "slug": slug.current, nome, dataHora, local, descricao, href
 }`;
 
 export async function getEventosProximos(): Promise<Evento[]> {

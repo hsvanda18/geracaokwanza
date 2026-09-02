@@ -33,6 +33,13 @@ export const evento = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: "descricao",
+      title: "Descrição",
+      type: "array",
+      of: [{ type: "block" }],
+      description: "Opcional — texto sobre o evento, mostrado na página de detalhe.",
+    }),
+    defineField({
       name: "href",
       title: "Link",
       type: "url",

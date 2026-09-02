@@ -36,6 +36,22 @@ const client = createClient({
   useCdn: false,
 });
 
+let contadorChave = 0;
+function chave(prefixo = "k") {
+  contadorChave += 1;
+  return `${prefixo}${contadorChave}`;
+}
+
+function bloco(texto, style = "normal") {
+  return {
+    _type: "block",
+    _key: chave("b"),
+    style,
+    markDefs: [],
+    children: [{ _type: "span", _key: chave("s"), text: texto, marks: [] }],
+  };
+}
+
 const documentos = [
   {
     _id: "episodio-003",
@@ -80,6 +96,12 @@ const documentos = [
     slug: { _type: "slug", current: "dinheiro-nao-fala-kimbundo" },
     dataHora: "2026-08-02T16:00:00+01:00",
     local: "Café Lu-Andu, Rua Direita do Patriota",
+    descricao: [
+      bloco("O dinheiro fala a nossa língua? Ou aprendemos a falar a língua do dinheiro?", "blockquote"),
+      bloco(
+        "Num país onde a cultura molda a forma como vivemos, consumimos e tomamos decisões, esta edição de \"À Sombra da Mulemba\" promove uma conversa aberta, intergeracional e transformadora sobre como as nossas referências culturais influenciam a forma como lidamos com o dinheiro, a poupança, o investimento e o futuro — porque construir riqueza também passa por compreender quem somos.",
+      ),
+    ],
   },
   {
     _id: "plataforma-youtube",
