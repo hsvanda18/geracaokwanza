@@ -118,7 +118,11 @@ instead of showing its full archive inline on the homepage:
    unsliced). Two unequal columns: Próximos (empty state when no real date
    is confirmed — never a fabricated entry) and Anteriores (compact
    archive list). `EventList` is shared between the preview and the full
-   page so the two-column markup isn't duplicated.
+   page so the two-column markup isn't duplicated; each event name is a
+   `Link` to its own detail page at `/eventos/[slug]` (name, date/local,
+   the optional external link, and — the reverse side of the
+   evento↔notícia relationship — a "Notícias sobre este evento" list via
+   `NoticiaList`, reusing the same dark register).
 
 `MissionBand` is the one full-gold section (brief requirement), a short,
 factual statement of purpose tied to the three theme pillars — no invented

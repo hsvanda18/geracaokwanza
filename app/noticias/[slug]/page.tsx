@@ -85,7 +85,7 @@ export default async function NoticiaPage(props: PageProps<"/noticias/[slug]">) 
             <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-2 border-t-2 border-navy/10 pt-6">
               {noticia.eventoRelacionado && (
                 <Link
-                  href={`/eventos#evento-${noticia.eventoRelacionado.slug}`}
+                  href={`/eventos/${noticia.eventoRelacionado.slug}`}
                   className="font-body text-xs font-semibold tracking-wide uppercase opacity-70 transition-opacity hover:opacity-100"
                 >
                   Evento: {noticia.eventoRelacionado.nome} →

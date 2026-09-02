@@ -241,6 +241,26 @@ export async function getEventosAnteriores(): Promise<Evento[]> {
   return docs.map(mapEvento);
 }
 
+export async function getEventoBySlug(slug: string): Promise<Evento | null> {
+  const doc = await sanityFetch<EventoDoc | null>(
+    groq`*[_type == "evento" && slug.current == $slug][0] ${EVENTO_PROJECTION}`,
+    { slug },
+  );
+  return doc ? mapEvento(doc) : null;
+}
+
+export async function getEventoSlugs(): Promise<string[]> {
+  return sanityFetch<string[]>(groq`*[_type == "evento"].slug.current`);
+}
+
+export async function getNoticiasPorEvento(slug: string): Promise<Noticia[]> {
+  const docs = await sanityFetch<NoticiaDoc[]>(
+    groq`*[_type == "noticia" && evento->slug.current == $slug] | order(data desc) ${NOTICIA_PROJECTION}`,
+    { slug },
+  );
+  return docs.map(mapNoticia);
+}
+
 export async function getPlataformas(): Promise<Plataforma[]> {
   const docs = await sanityFetch<PlataformaDoc[]>(
     groq`*[_type == "plataforma"] | order(ordem asc) { nome, href }`,

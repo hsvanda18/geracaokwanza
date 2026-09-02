@@ -60,7 +60,7 @@ function Row({ noticia }: { noticia: Noticia }) {
           <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-1">
             {noticia.eventoRelacionado && (
               <Link
-                href={`/eventos#evento-${noticia.eventoRelacionado.slug}`}
+                href={`/eventos/${noticia.eventoRelacionado.slug}`}
                 className="font-body text-xs font-semibold tracking-wide text-gold uppercase transition-colors hover:text-paper"
               >
                 Evento: {noticia.eventoRelacionado.nome} →

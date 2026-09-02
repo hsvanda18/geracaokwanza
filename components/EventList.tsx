@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { Evento } from "@/lib/content";
 import { Pensador } from "./icons/Pensador";
 import { PlaceholderTag } from "./PlaceholderTag";
@@ -28,10 +29,15 @@ export function EventList({
         ) : (
           <ul className="space-y-6">
             {proximos.map((ev, i) => (
-              <li key={i} id={`evento-${ev.slug}`} className="scroll-mt-24 flex items-start gap-3">
+              <li key={i} className="flex items-start gap-3">
                 <Pensador size={16} color="var(--color-gold)" className="mt-1.5 shrink-0" />
                 <div>
-                  <p className="font-display text-lg font-semibold text-paper">{ev.nome}</p>
+                  <Link
+                    href={`/eventos/${ev.slug}`}
+                    className="font-display block text-lg font-semibold text-paper transition-colors hover:text-gold"
+                  >
+                    {ev.nome}
+                  </Link>
                   <p className="mt-1 font-body text-sm text-paper/70">
                     {ev.data} · {ev.local}
                   </p>
@@ -65,13 +71,17 @@ export function EventList({
             {anteriores.map((ev, i) => (
               <li
                 key={i}
-                id={`evento-${ev.slug}`}
-                className={`scroll-mt-24 flex items-start justify-between gap-4 border-b border-paper/10 pb-4 ${
+                className={`flex items-start justify-between gap-4 border-b border-paper/10 pb-4 ${
                   ev.isPlaceholder ? "opacity-60" : ""
                 }`}
               >
                 <div>
-                  <p className="font-body text-sm font-semibold text-paper">{ev.nome}</p>
+                  <Link
+                    href={`/eventos/${ev.slug}`}
+                    className="block font-body text-sm font-semibold text-paper transition-colors hover:text-gold"
+                  >
+                    {ev.nome}
+                  </Link>
                   <p className="mt-0.5 font-body text-xs text-paper/60">
                     {ev.data} · {ev.local}
                   </p>
