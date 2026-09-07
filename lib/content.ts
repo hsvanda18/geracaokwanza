@@ -35,6 +35,16 @@ export type Episodio = {
   isPlaceholder: boolean;
 };
 
+/** A standalone YouTube video that isn't a numbered podcast episódio — no guest/duration/temas required. */
+export type Video = {
+  titulo: string;
+  descricao?: string;
+  href?: string;
+  youtubeId?: string;
+  data: string;
+  isPlaceholder: boolean;
+};
+
 export type Artigo = {
   slug: string;
   titulo: string;

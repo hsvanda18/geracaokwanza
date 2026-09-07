@@ -3,7 +3,8 @@ import { EpisodiosBrowser } from "@/components/EpisodiosBrowser";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { KwanzaFrame } from "@/components/icons/KwanzaFrame";
-import { getEpisodios } from "@/lib/sanity/queries";
+import { VideoCard } from "@/components/VideoCard";
+import { getEpisodios, getVideos } from "@/lib/sanity/queries";
 
 export const metadata: Metadata = {
   title: "Episódios — Geração Kwanza",
@@ -12,7 +13,7 @@ export const metadata: Metadata = {
 };
 
 export default async function EpisodiosPage() {
-  const episodios = await getEpisodios();
+  const [episodios, videos] = await Promise.all([getEpisodios(), getVideos()]);
 
   return (
     <>
@@ -41,6 +42,21 @@ export default async function EpisodiosPage() {
             <EpisodiosBrowser episodios={episodios} />
           </div>
         </section>
+
+        {videos.length > 0 && (
+          <section className="border-t-2 border-gold/20 bg-navy py-12 sm:py-16">
+            <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
+              <h2 className="font-display mb-6 text-xl font-semibold tracking-wide text-paper uppercase sm:mb-10 sm:text-2xl">
+                Outros vídeos
+              </h2>
+              <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {videos.map((video, i) => (
+                  <VideoCard key={i} video={video} />
+                ))}
+              </ul>
+            </div>
+          </section>
+        )}
       </main>
       <Footer />
     </>

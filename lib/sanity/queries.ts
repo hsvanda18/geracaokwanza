@@ -1,6 +1,6 @@
 import { groq } from "next-sanity";
 import type { PortableTextBlock } from "@portabletext/types";
-import type { Artigo, Autor, Episodio, Evento, Imagem, Noticia, Plataforma, Tema } from "../content";
+import type { Artigo, Autor, Episodio, Evento, Imagem, Noticia, Plataforma, Tema, Video } from "../content";
 import { sanityFetch } from "./client";
 import { formatarData, formatarDataHora } from "./format";
 
@@ -41,6 +41,14 @@ type EpisodioDoc = {
   temas: Tema[];
   href: string | null;
   youtubeId: string | null;
+};
+
+type VideoDoc = {
+  titulo: string;
+  descricao: string | null;
+  href: string | null;
+  youtubeId: string | null;
+  data: string;
 };
 
 type ArtigoDoc = {
@@ -84,6 +92,17 @@ type ContactoDoc = {
   email: string | null;
   redes: { nome: string; href: string }[] | null;
 };
+
+function mapVideo(doc: VideoDoc): Video {
+  return {
+    titulo: doc.titulo,
+    descricao: doc.descricao ?? undefined,
+    href: doc.href ?? undefined,
+    youtubeId: doc.youtubeId ?? undefined,
+    data: formatarData(doc.data),
+    isPlaceholder: false,
+  };
+}
 
 function mapEpisodio(doc: EpisodioDoc): Episodio {
   return {
@@ -180,6 +199,13 @@ export async function getEpisodioByNumero(numero: string): Promise<Episodio | nu
     { numero },
   );
   return doc ? mapEpisodio(doc) : null;
+}
+
+const VIDEO_PROJECTION = groq`{ titulo, descricao, href, youtubeId, data }`;
+
+export async function getVideos(): Promise<Video[]> {
+  const docs = await sanityFetch<VideoDoc[]>(groq`*[_type == "video"] | order(data desc) ${VIDEO_PROJECTION}`);
+  return docs.map(mapVideo);
 }
 
 const ARTIGO_PROJECTION = groq`{

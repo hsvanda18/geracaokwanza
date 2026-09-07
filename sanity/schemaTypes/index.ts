@@ -5,5 +5,6 @@ import { episodio } from "./episodio";
 import { evento } from "./evento";
 import { noticia } from "./noticia";
 import { plataforma } from "./plataforma";
+import { video } from "./video";
 
-export const schemaTypes = [episodio, artigo, autor, noticia, evento, plataforma, contacto];
+export const schemaTypes = [episodio, video, artigo, autor, noticia, evento, plataforma, contacto];

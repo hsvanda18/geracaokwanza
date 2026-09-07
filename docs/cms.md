@@ -55,15 +55,21 @@ non-technical-editor-friendly of the free options.
   artigos...", "Sem eventos agendados...") cover that case instead of a
   visible bracket placeholder.
 - A `noticia` can optionally reference a specific `evento` ("Evento
-  relacionado" in the Studio). Each event row on `/eventos` has a stable
-  anchor id from the event's `slug` field, and a linked notícia shows a
-  small "Evento: [nome] →" chip pointing at it.
+  relacionado" in the Studio) — both get their own detail page
+  (`/noticias/[slug]`, `/eventos/[slug]`), and each links to the other:
+  the notícia shows an "Evento: [nome] →" chip, the evento page shows a
+  "Notícias sobre este evento" list (the reverse of the same reference).
 - `noticia` and `artigo` both have an optional "Fotos" (`imagens`) field —
   real photos only, uploaded through the Studio's image field (drag and
   drop or click to browse). `next.config.ts` allows images from
   `cdn.sanity.io`. A notícia's first photo shows as a small cover
   thumbnail in the listing; both types show the full set as a grid on
   their detail page.
+- A `video` document is a standalone YouTube video that isn't a numbered
+  podcast `episodio` — no guest, duration, or theme required, just a
+  título, an optional descrição, and the YouTube link/id. Shown in an
+  "Outros vídeos" section on `/episodios`, below the main catalogue, only
+  once at least one exists.
 
 ## Caching
 

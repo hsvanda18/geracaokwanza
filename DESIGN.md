@@ -95,7 +95,12 @@ instead of showing its full archive inline on the homepage:
    `VideoLightbox`, the cinema-mode overlay, is reserved for `VideoFacade`'s
    own "maximizar" control (hero, inline, and watch-page players). An
    episódio without a `youtubeId` yet falls back to the dashed-stripe
-   poster treatment instead of a broken thumbnail.
+   poster treatment instead of a broken thumbnail. Below the catalogue,
+   an "Outros vídeos" section (`VideoCard`, only rendered when at least
+   one exists) holds YouTube content that isn't a numbered podcast
+   episódio — no guest/duration/temas required; clicking one opens
+   straight into `VideoLightbox` rather than a watch page, since these
+   don't warrant their own route.
 2. **Artigos** — `ArticlesSection` preview on the homepage, off-white
    editorial list register (Fredoka titles, Public Sans leads, Pensador
    bullet, author/date); full catalogue with theme filter at `/artigos`
