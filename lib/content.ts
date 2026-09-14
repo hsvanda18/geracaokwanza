@@ -88,6 +88,14 @@ export type Plataforma = {
   isPlaceholder: boolean;
 };
 
+export type Membro = {
+  nome: string;
+  cargo: string;
+  foto?: Imagem;
+  bio?: string;
+  href?: string;
+};
+
 /** Estimated minutes to read, from the article's real word count (200 wpm). */
 export function tempoDeLeitura(artigo: Artigo): number {
   const palavras = artigo.corpo

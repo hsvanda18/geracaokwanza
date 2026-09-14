@@ -16,7 +16,11 @@ export const structure: StructureResolver = (S) =>
       S.documentTypeListItem("noticia").title("Notícias"),
       S.documentTypeListItem("evento").title("Eventos"),
       S.documentTypeListItem("plataforma").title("Plataformas"),
+      S.documentTypeListItem("membro").title("Equipa"),
       S.divider(),
+      S.listItem()
+        .title("Sobre nós")
+        .child(S.document().schemaType("sobre").documentId("sobre")),
       S.listItem()
         .title("Contacto")
         .child(S.document().schemaType("contacto").documentId("contacto")),

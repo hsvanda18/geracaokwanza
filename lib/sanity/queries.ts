@@ -1,6 +1,6 @@
 import { groq } from "next-sanity";
 import type { PortableTextBlock } from "@portabletext/types";
-import type { Artigo, Autor, Episodio, Evento, Imagem, Noticia, Plataforma, Tema, Video } from "../content";
+import type { Artigo, Autor, Episodio, Evento, Imagem, Membro, Noticia, Plataforma, Tema, Video } from "../content";
 import { sanityFetch } from "./client";
 import { formatarData, formatarDataHora } from "./format";
 
@@ -93,6 +93,18 @@ type ContactoDoc = {
   redes: { nome: string; href: string }[] | null;
 };
 
+type MembroDoc = {
+  nome: string;
+  cargo: string;
+  foto: FotoDoc | null;
+  bio: string | null;
+  href: string | null;
+};
+
+type SobreDoc = {
+  texto: PortableTextBlock[] | null;
+};
+
 function mapVideo(doc: VideoDoc): Video {
   return {
     titulo: doc.titulo,
@@ -160,6 +172,16 @@ function mapEvento(doc: EventoDoc): Evento {
 
 function mapPlataforma(doc: PlataformaDoc): Plataforma {
   return { nome: doc.nome, href: doc.href, isPlaceholder: false };
+}
+
+function mapMembro(doc: MembroDoc): Membro {
+  return {
+    nome: doc.nome,
+    cargo: doc.cargo,
+    foto: mapFoto(doc.foto),
+    bio: doc.bio ?? undefined,
+    href: doc.href ?? undefined,
+  };
 }
 
 const EPISODIO_PROJECTION = groq`{
@@ -309,4 +331,16 @@ export async function getContacto(): Promise<{
     emailIsPlaceholder: !doc?.email,
     redes: (doc?.redes ?? []).map((r) => ({ ...r, isPlaceholder: false })),
   };
+}
+
+export async function getMembrosEquipa(): Promise<Membro[]> {
+  const docs = await sanityFetch<MembroDoc[]>(
+    groq`*[_type == "membro"] | order(ordem asc) { nome, cargo, foto{ ${IMAGEM_CAMPOS} }, bio, href }`,
+  );
+  return docs.map(mapMembro);
+}
+
+export async function getSobre(): Promise<PortableTextBlock[] | undefined> {
+  const doc = await sanityFetch<SobreDoc | null>(groq`*[_type == "sobre"][0] { texto }`);
+  return doc?.texto ?? undefined;
 }

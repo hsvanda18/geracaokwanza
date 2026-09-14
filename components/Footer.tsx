@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { getContacto, getPlataformas } from "@/lib/sanity/queries";
 import { PlaceholderTag } from "./PlaceholderTag";
 
@@ -83,9 +84,17 @@ export async function Footer() {
           </div>
         </div>
 
-        <p className="mt-14 border-t border-paper/10 pt-6 font-body text-xs text-paper/40">
-          © {new Date().getFullYear()} Geração Kwanza. Todos os direitos reservados.
-        </p>
+        <div className="mt-14 flex flex-wrap items-center justify-between gap-4 border-t border-paper/10 pt-6">
+          <p className="font-body text-xs text-paper/40">
+            © {new Date().getFullYear()} Geração Kwanza. Todos os direitos reservados.
+          </p>
+          <Link
+            href="/sobre"
+            className="font-body text-xs font-semibold tracking-wide text-paper/50 uppercase transition-colors hover:text-gold"
+          >
+            Sobre nós
+          </Link>
+        </div>
       </div>
     </footer>
   );

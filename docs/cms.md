@@ -70,6 +70,13 @@ non-technical-editor-friendly of the free options.
   título, an optional descrição, and the YouTube link/id. Shown in an
   "Outros vídeos" section on `/episodios`, below the main catalogue, only
   once at least one exists.
+- `/sobre` is a new page: `membro` (nome, cargo, foto opcional, bio
+  opcional, link opcional) populates a team grid there, shown only once at
+  least one member is published. `sobre` is a singleton (same recipe as
+  `contacto`) with one optional rich-text field, "A nossa história" — the
+  page's intro paragraph is fixed site copy (already-confirmed positioning
+  from `PRODUCT.md`, not per-item CMS content), and this field is purely
+  additive: leave it empty and the page just shows that intro.
 
 ## Caching
 

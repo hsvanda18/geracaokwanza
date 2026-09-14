@@ -133,6 +133,15 @@ instead of showing its full archive inline on the homepage:
 factual statement of purpose tied to the three theme pillars — no invented
 metrics or testimonials.
 
+**Sobre nós** (`/sobre`) is a utility page, not a fifth content pillar —
+deliberately kept out of the header nav (which stays at exactly the four
+fixed content types) and linked instead from the Footer. Navy hero (like
+the other catalogue pages) + paper body: a fixed intro paragraph (already-
+confirmed site positioning, not fabricated for this page) with room for an
+optional longer "A nossa história" from the Studio (`sobre` singleton),
+then a team grid (`MembroCard`) that only renders once a real `membro`
+exists — same empty-until-real-content discipline as everywhere else.
+
 ## Content source
 
 Sanity is the content source (`lib/sanity/queries.ts`; schemas in
