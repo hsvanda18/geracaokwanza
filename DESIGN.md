@@ -134,14 +134,27 @@ instead of showing its full archive inline on the homepage:
 factual statement of purpose tied to the three theme pillars — no invented
 metrics or testimonials.
 
-**Sobre nós** (`/sobre`) is a utility page, not a fifth content pillar —
-deliberately kept out of the header nav (which stays at exactly the four
-fixed content types) and linked instead from the Footer. Navy hero (like
-the other catalogue pages) + paper body: a fixed intro paragraph (already-
-confirmed site positioning, not fabricated for this page) with room for an
-optional longer "A nossa história" from the Studio (`sobre` singleton),
-then a team grid (`MembroCard`) that only renders once a real `membro`
-exists — same empty-until-real-content discipline as everywhere else.
+**Sobre nós** (`/sobre`) is a utility page, not a fifth content pillar,
+but it is linked from the header nav (last, after Eventos) as well as the
+Footer. Sections, top to bottom, alternating surfaces:
+1. Navy hero with real counts of published episódios, artigos, notícias
+   and eventos (gold editorial numerals) — counts from Sanity, never
+   invented metrics; a type with zero is left out.
+2. "Quem somos" (paper): the fixed intro paragraphs (already-confirmed
+   positioning) plus the optional Studio text.
+3. "O que cobrimos" (navy): the three temas, reusing `MissionBand`'s
+   `pilares` copy.
+4. "A nossa história" (paper): vertical timeline, gold year blocks.
+5. Missão / Visão (gold band, navy text).
+6. "Os nossos valores" (numbered cards) and "A equipa" (`MembroCard`),
+   on paper.
+7. "Perguntas frequentes" (native `<details>` accordion) beside a
+   "Fala connosco" contact card (email + redes from `contacto`) on
+   navy-ink. There is no contact form — nothing to send it to — the card
+   links to the email instead.
+Sections 4–6 and the FAQ come from the `sobre` singleton and only render
+once filled in — same empty-until-real-content discipline as everywhere
+else.
 
 ## Content source
 

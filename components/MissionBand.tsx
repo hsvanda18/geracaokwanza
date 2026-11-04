@@ -1,6 +1,7 @@
 import { Pensador } from "./icons/Pensador";
 
-const pilares = [
+/** The three editorial pillars — shared with the "Sobre nós" coverage section. */
+export const pilares = [
   {
     tema: "ECONOMIA",
     texto: "O kwanza, os preços, o crédito e o trabalho — como se decide o que se pode pagar.",

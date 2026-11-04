@@ -75,10 +75,12 @@ non-technical-editor-friendly of the free options.
 - `/sobre` is a new page: `membro` (nome, cargo, foto opcional, bio
   opcional, link opcional) populates a team grid there, shown only once at
   least one member is published. `sobre` is a singleton (same recipe as
-  `contacto`) with one optional rich-text field, "A nossa história" — the
-  page's intro paragraph is fixed site copy (already-confirmed positioning
-  from `PRODUCT.md`, not per-item CMS content), and this field is purely
-  additive: leave it empty and the page just shows that intro.
+  `contacto`), split into Studio tabs: "Quem somos" (rich text, shown
+  under the fixed intro), "A nossa história" (list of marcos: ano, título,
+  descrição — a timeline), Missão, Visão, "Os nossos valores" (título,
+  descrição) and "Perguntas frequentes" (pergunta, resposta). Every field
+  is optional and its section stays hidden while empty. The hero's
+  numbers are counted live from published documents, not typed in.
 
 ## Caching
 

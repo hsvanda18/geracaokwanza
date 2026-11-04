@@ -98,6 +98,24 @@ export type Membro = {
   href?: string;
 };
 
+/** The "Sobre nós" singleton. Every section is optional and hidden while empty. */
+export type Sobre = {
+  texto?: PortableTextBlock[];
+  marcos: { ano: string; titulo: string; descricao?: string }[];
+  missao?: string;
+  visao?: string;
+  valores: { titulo: string; descricao?: string }[];
+  perguntas: { pergunta: string; resposta: string }[];
+};
+
+/** Real counts of published content, shown on the "Sobre nós" page. */
+export type Numeros = {
+  episodios: number;
+  artigos: number;
+  noticias: number;
+  eventos: number;
+};
+
 /** Estimated minutes to read, from the article's real word count (200 wpm). */
 export function tempoDeLeitura(artigo: Artigo): number {
   const palavras = artigo.corpo

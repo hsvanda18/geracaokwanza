@@ -1,6 +1,19 @@
 import { groq } from "next-sanity";
 import type { PortableTextBlock } from "@portabletext/types";
-import type { Artigo, Autor, Episodio, Evento, Imagem, Membro, Noticia, Plataforma, Tema, Video } from "../content";
+import type {
+  Artigo,
+  Autor,
+  Episodio,
+  Evento,
+  Imagem,
+  Membro,
+  Noticia,
+  Numeros,
+  Plataforma,
+  Sobre,
+  Tema,
+  Video,
+} from "../content";
 import { sanityFetch } from "./client";
 import { formatarData, formatarDataHora } from "./format";
 
@@ -104,6 +117,11 @@ type MembroDoc = {
 
 type SobreDoc = {
   texto: PortableTextBlock[] | null;
+  marcos: { ano: string; titulo: string; descricao: string | null }[] | null;
+  missao: string | null;
+  visao: string | null;
+  valores: { titulo: string; descricao: string | null }[] | null;
+  perguntas: { pergunta: string; resposta: string }[] | null;
 };
 
 function mapVideo(doc: VideoDoc): Video {
@@ -342,7 +360,35 @@ export async function getMembrosEquipa(): Promise<Membro[]> {
   return docs.map(mapMembro);
 }
 
-export async function getSobre(): Promise<PortableTextBlock[] | undefined> {
-  const doc = await sanityFetch<SobreDoc | null>(groq`*[_type == "sobre"][0] { texto }`);
-  return doc?.texto ?? undefined;
+export async function getSobre(): Promise<Sobre> {
+  const doc = await sanityFetch<SobreDoc | null>(
+    groq`*[_type == "sobre"][0] {
+      texto,
+      marcos[]{ ano, titulo, descricao },
+      missao,
+      visao,
+      valores[]{ titulo, descricao },
+      perguntas[]{ pergunta, resposta }
+    }`,
+  );
+  const texto = doc?.texto?.length ? doc.texto : undefined;
+  return {
+    texto,
+    marcos: (doc?.marcos ?? []).map((m) => ({ ...m, descricao: m.descricao ?? undefined })),
+    missao: doc?.missao?.trim() || undefined,
+    visao: doc?.visao?.trim() || undefined,
+    valores: (doc?.valores ?? []).map((v) => ({ ...v, descricao: v.descricao ?? undefined })),
+    perguntas: doc?.perguntas ?? [],
+  };
+}
+
+export async function getNumeros(): Promise<Numeros> {
+  return sanityFetch<Numeros>(
+    groq`{
+      "episodios": count(*[_type == "episodio"]),
+      "artigos": count(*[_type == "artigo"]),
+      "noticias": count(*[_type == "noticia"]),
+      "eventos": count(*[_type == "evento"])
+    }`,
+  );
 }
