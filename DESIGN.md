@@ -18,8 +18,8 @@ Exactly three colors, no fourth, no gradients — brief-pinned:
   sections (Mission band), not just accents.
 - `--color-paper` `#F7F5F0` — body text on navy, and the Articles section
   background.
-- `--color-navy-ink` `#0E1A2C` — a darker navy utility shade (platform
-  strip, episodes-adjacent surfaces, footer) used to vary depth within the
+- `--color-navy-ink` `#0E1A2C` — a darker navy utility shade
+  (episodes-adjacent surfaces, footer) used to vary depth within the
   navy family without introducing a fourth hue.
 
 Rule with zero exceptions: white/paper text never sits on gold. Every
