@@ -1,4 +1,5 @@
 import { defineField, defineType } from "sanity";
+import { TEMA_OPTIONS } from "./temas";
 
 export const video = defineType({
   name: "video",
@@ -10,6 +11,15 @@ export const video = defineType({
       title: "Título",
       type: "string",
       validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "temas",
+      title: "Tema",
+      type: "array",
+      of: [{ type: "string" }],
+      options: { list: TEMA_OPTIONS },
+      description: "Aparece em destaque sobre a miniatura do vídeo no site. Normalmente um; marca dois só se o vídeo tratar mesmo dos dois.",
+      validation: (Rule) => Rule.required().min(1),
     }),
     defineField({
       name: "descricao",
@@ -38,6 +48,10 @@ export const video = defineType({
     }),
   ],
   preview: {
-    select: { title: "titulo", subtitle: "data" },
+    select: { title: "titulo", data: "data", temas: "temas" },
+    prepare({ title, data, temas }) {
+      const tema = Array.isArray(temas) && temas.length > 0 ? temas.join(" · ") : "Sem tema";
+      return { title, subtitle: `${tema} — ${data ?? ""}` };
+    },
   },
 });

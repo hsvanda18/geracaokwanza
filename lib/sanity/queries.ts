@@ -45,6 +45,7 @@ type EpisodioDoc = {
 
 type VideoDoc = {
   titulo: string;
+  temas: Tema[] | null;
   descricao: string | null;
   href: string | null;
   youtubeId: string | null;
@@ -108,6 +109,7 @@ type SobreDoc = {
 function mapVideo(doc: VideoDoc): Video {
   return {
     titulo: doc.titulo,
+    temas: doc.temas ?? [],
     descricao: doc.descricao ?? undefined,
     href: doc.href ?? undefined,
     youtubeId: doc.youtubeId ?? undefined,
@@ -223,7 +225,7 @@ export async function getEpisodioByNumero(numero: string): Promise<Episodio | nu
   return doc ? mapEpisodio(doc) : null;
 }
 
-const VIDEO_PROJECTION = groq`{ titulo, descricao, href, youtubeId, data }`;
+const VIDEO_PROJECTION = groq`{ titulo, temas, descricao, href, youtubeId, data }`;
 
 export async function getVideos(): Promise<Video[]> {
   const docs = await sanityFetch<VideoDoc[]>(groq`*[_type == "video"] | order(data desc) ${VIDEO_PROJECTION}`);

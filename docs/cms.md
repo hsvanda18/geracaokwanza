@@ -66,8 +66,10 @@ non-technical-editor-friendly of the free options.
   thumbnail in the listing; both types show the full set as a grid on
   their detail page.
 - A `video` document is a standalone YouTube video that isn't a numbered
-  podcast `episodio` — no guest, duration, or theme required, just a
-  título, an optional descrição, and the YouTube link/id. Shown in an
+  podcast `episodio` — no guest or duration, just a título, a required
+  tema (`temas`, same options as episódios, usually one), an optional
+  descrição, and the YouTube link/id. The tema shows as a gold chip over
+  the video's thumbnail, and in the Studio list next to the date. Shown in an
   "Outros vídeos" section on `/episodios`, below the main catalogue, only
   once at least one exists.
 - `/sobre` is a new page: `membro` (nome, cargo, foto opcional, bio

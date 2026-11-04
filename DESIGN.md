@@ -98,7 +98,8 @@ instead of showing its full archive inline on the homepage:
    poster treatment instead of a broken thumbnail. Below the catalogue,
    an "Outros vídeos" section (`VideoCard`, only rendered when at least
    one exists) holds YouTube content that isn't a numbered podcast
-   episódio — no guest/duration/temas required; clicking one opens
+   episódio — no guest/duration, but always a tema, shown as a solid
+   gold chip with navy text over the thumbnail; clicking one opens
    straight into `VideoLightbox` rather than a watch page, since these
    don't warrant their own route.
 2. **Artigos** — `ArticlesSection` preview on the homepage, off-white

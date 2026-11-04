@@ -7,7 +7,8 @@ import { VideoLightbox } from "./VideoLightbox";
 
 /**
  * Lighter-weight card for "outros vídeos" — YouTube content that isn't a
- * numbered podcast episódio (no guest, duration, or temas required).
+ * numbered podcast episódio (no guest or duration). The tema is the card's
+ * main label, shown as a solid gold chip over the thumbnail.
  * Opens straight into the cinema-mode VideoLightbox on click, since these
  * don't get their own watch page.
  */
@@ -49,6 +50,18 @@ export function VideoCard({ video }: { video: Video }) {
             </svg>
           </span>
         </span>
+        {video.temas.length > 0 && (
+          <span className="absolute top-3 left-3 flex flex-wrap gap-2">
+            {video.temas.map((tema) => (
+              <span
+                key={tema}
+                className="bg-gold px-2.5 py-1 font-body text-[11px] font-bold tracking-[0.16em] text-navy uppercase"
+              >
+                {tema}
+              </span>
+            ))}
+          </span>
+        )}
       </button>
 
       <div className="flex flex-1 flex-col p-5">
