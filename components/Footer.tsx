@@ -87,6 +87,18 @@ export async function Footer() {
         <div className="mt-14 flex flex-wrap items-center justify-between gap-4 border-t border-paper/10 pt-6">
           <p className="font-body text-xs text-paper/40">
             © {new Date().getFullYear()} Geração Kwanza. Todos os direitos reservados.
+            <span className="mx-2 text-paper/20" aria-hidden="true">
+              ·
+            </span>
+            Criado por{" "}
+            <a
+              href="https://www.instagram.com/hairtonvanda/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-paper/60 underline-offset-4 transition-colors hover:text-gold hover:underline"
+            >
+              Hairton Vanda
+            </a>
           </p>
           <Link
             href="/sobre"
