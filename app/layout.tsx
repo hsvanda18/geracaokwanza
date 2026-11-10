@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Fredoka, Public_Sans } from "next/font/google";
+import { SITE_DESCRIPTION, SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 const fredoka = Fredoka({
@@ -15,9 +16,9 @@ const publicSans = Public_Sans({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "Geração Kwanza — Economia, Política e Sociedade de Angola",
-  description:
-    "Podcast e plataforma de conteúdo sobre economia, política e sociedade de Angola. Episódios, artigos e eventos de debate cívico.",
+  description: SITE_DESCRIPTION,
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
